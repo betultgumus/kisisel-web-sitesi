@@ -8,17 +8,19 @@ type Props = {
   theme: "light" | "dark";
   placement: "hero" | "portfolio";
   mobile: boolean;
+  targetHeight: number;
   trackingEnabled: boolean;
 };
 
-export function CharacterScene({ theme, placement, mobile, trackingEnabled }: Props) {
+export function CharacterScene({ theme, placement, mobile, targetHeight, trackingEnabled }: Props) {
   const headTracking = useMemo<HeadTrackingUniforms>(() => ({
     yaw: { value: 0 },
     pitch: { value: 0 },
   }), []);
-  const targetHeight = placement === "portfolio" ? 3.05 : mobile ? 2.72 : 3.32;
   const baseRotationY = placement === "portfolio" ? -0.08 : 0;
   const groundY = -targetHeight / 2;
+  const shadowScale = mobile ? 2.45 : placement === "hero" ? 3.55 : 3.25;
+  const shadowOpacity = theme === "dark" ? (mobile ? 0.48 : 0.4) : mobile ? 0.32 : 0.25;
 
   return (
     <>
@@ -29,10 +31,10 @@ export function CharacterScene({ theme, placement, mobile, trackingEnabled }: Pr
       <CharacterLookController headTracking={headTracking} placement={placement} enabled={trackingEnabled} />
       <ContactShadows
         position={[0, groundY + 0.015, 0]}
-        scale={placement === "hero" ? 3.7 : 3.5}
-        opacity={theme === "dark" ? 0.42 : 0.27}
+        scale={shadowScale}
+        opacity={shadowOpacity}
         color={theme === "dark" ? "#020817" : "#58434f"}
-        blur={2.8}
+        blur={mobile ? 2.15 : 2.65}
         far={4.5}
         frames={1}
       />

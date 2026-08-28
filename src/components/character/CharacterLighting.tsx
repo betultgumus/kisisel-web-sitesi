@@ -3,28 +3,28 @@ import { useMemo, useRef } from "react";
 import { AmbientLight, Color, DirectionalLight, HemisphereLight, MathUtils, PointLight } from "three";
 
 const LIGHT_CHARACTER_LIGHTING = {
-  ambient: 0.7,
-  hemisphere: 0.88,
-  key: 2.2,
-  fill: 1.75,
-  rim: 1.95,
-  sky: "#fff8ef",
-  ground: "#c9c8d2",
-  keyColor: "#fff0dc",
-  fillColor: "#bfd1f2",
+  ambient: 0.62,
+  hemisphere: 0.94,
+  key: 2.05,
+  fill: 1.48,
+  rim: 1.7,
+  sky: "#fffaf5",
+  ground: "#bfc5d0",
+  keyColor: "#fff2e6",
+  fillColor: "#c3d5f2",
   rimColor: "#ec4899",
 };
 
 const DARK_CHARACTER_LIGHTING = {
-  ambient: 0.52,
-  hemisphere: 0.72,
-  key: 1.65,
-  fill: 2.15,
-  rim: 2.55,
-  sky: "#91aee3",
+  ambient: 0.5,
+  hemisphere: 0.8,
+  key: 1.82,
+  fill: 1.82,
+  rim: 2.25,
+  sky: "#9bb6e4",
   ground: "#07111f",
-  keyColor: "#c9ddff",
-  fillColor: "#7768d8",
+  keyColor: "#d9e6ff",
+  fillColor: "#8b7de0",
   rimColor: "#ec4899",
 };
 
@@ -72,9 +72,9 @@ export function CharacterLighting({ theme = "light" }: { theme?: "light" | "dark
     <>
       <ambientLight ref={ambient} intensity={initialLighting.ambient} />
       <hemisphereLight ref={hemisphere} args={[initialColors.sky, initialColors.ground, initialLighting.hemisphere]} />
-      <directionalLight ref={key} position={[4, 5.5, 5]} intensity={initialLighting.key} color={initialColors.key} />
-      <pointLight ref={fill} position={[-3.4, 1.6, 3.4]} intensity={initialLighting.fill} color={initialColors.fill} distance={9} />
-      <pointLight ref={rim} position={[3.2, 2.2, -2.5]} intensity={initialLighting.rim} color={initialColors.rim} distance={8} />
+      <directionalLight ref={key} position={[4.2, 5.8, 5.2]} intensity={initialLighting.key} color={initialColors.key} />
+      <pointLight ref={fill} position={[-3.6, 1.8, 3.6]} intensity={initialLighting.fill} color={initialColors.fill} distance={9} />
+      <pointLight ref={rim} position={[3.25, 2.5, -2.7]} intensity={initialLighting.rim} color={initialColors.rim} distance={8.5} />
     </>
   );
 }

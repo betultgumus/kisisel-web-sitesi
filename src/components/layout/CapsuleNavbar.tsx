@@ -5,6 +5,15 @@ import { ThemeToggle } from "./ThemeToggle";
 
 type Props = { activeIndex: number; onSelect: (index: number) => void };
 
+const compactLabels: Record<string, string> = {
+  about: "Ben",
+  education: "Eğitim",
+  experience: "Deneyim",
+  portfolio: "İşler",
+  gallery: "Galeri",
+  contact: "İletişim",
+};
+
 export function CapsuleNavbar({ activeIndex, onSelect }: Props) {
   const navigate = useNavigate();
   const handleClick = (index: number) => {
@@ -20,7 +29,8 @@ export function CapsuleNavbar({ activeIndex, onSelect }: Props) {
         {sections.map((section, index) => (
           <button key={section.id} className={index === activeIndex ? "active" : ""} onClick={() => handleClick(index)}>
             {index === activeIndex && <motion.span className="nav-pill" layoutId="active-nav" transition={{ type: "spring", stiffness: 380, damping: 36 }} />}
-            <span>{section.title.replace(" & Sertifikalar", "")}</span>
+            <span className="nav-label-full">{section.title.replace(" & Sertifikalar", "")}</span>
+            <span className="nav-label-compact">{compactLabels[section.id] ?? section.title}</span>
           </button>
         ))}
       </div>
