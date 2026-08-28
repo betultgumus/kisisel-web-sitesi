@@ -77,19 +77,11 @@ a { color: inherit; text-decoration: none; }
 
 .home-page { position: relative; isolation: isolate; background: color-mix(in srgb, var(--background) 76%, transparent); }
 .animated-background { position: fixed; z-index: 0; inset: 0; overflow: hidden; contain: strict; pointer-events: none; background: var(--background); transition: background-color .45s ease; }
-.ambient-orb { position: absolute; display: block; border-radius: 999px; opacity: .72; will-change: transform; transform: translate3d(0, 0, 0); }
-.ambient-orb-one { width: 68vmax; height: 68vmax; left: -24vmax; top: -30vmax; background: radial-gradient(circle, var(--ambient-pink) 0, color-mix(in srgb, var(--ambient-violet) 72%, transparent) 35%, transparent 70%); animation: ambient-drift-one 38s ease-in-out infinite; }
-.ambient-orb-two { width: 58vmax; height: 58vmax; right: -22vmax; top: 8vh; background: radial-gradient(circle, var(--ambient-violet) 0, color-mix(in srgb, var(--ambient-blue) 76%, transparent) 38%, transparent 70%); animation: ambient-drift-two 46s ease-in-out infinite; }
-.ambient-orb-three { width: 46vmax; height: 46vmax; left: 24vw; bottom: -27vmax; background: radial-gradient(circle, var(--ambient-blue) 0, color-mix(in srgb, var(--ambient-pink) 64%, transparent) 42%, transparent 71%); animation: ambient-drift-three 42s ease-in-out infinite; }
+.ambient-orb { position: absolute; display: block; border-radius: 45% 55% 62% 38% / 54% 38% 62% 46%; opacity: .84; will-change: transform; transform: translate3d(0, 0, 0); }
 .ambient-vignette { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0 35%, color-mix(in srgb, var(--background-deep) 18%, transparent) 62%, color-mix(in srgb, var(--background) 46%, transparent)); }
-.animated-background--layered-aurora .ambient-orb { border-radius: 45% 55% 62% 38% / 54% 38% 62% 46%; opacity: .84; }
-.animated-background--layered-aurora .ambient-orb-one { width: 76vmax; height: 36vmax; left: -20vmax; top: -10vmax; background: radial-gradient(ellipse, var(--ambient-pink), transparent 68%); }
-.animated-background--layered-aurora .ambient-orb-two { width: 72vmax; height: 34vmax; right: -26vmax; top: 25vh; background: radial-gradient(ellipse, var(--ambient-violet), transparent 68%); }
-.animated-background--layered-aurora .ambient-orb-three { width: 68vmax; height: 30vmax; left: 10vw; bottom: -12vmax; background: radial-gradient(ellipse, var(--ambient-blue), transparent 70%); }
-.animated-background--mist-waves .ambient-orb { width: 92vmax; height: 34vmax; border-radius: 50%; opacity: .62; }
-.animated-background--mist-waves .ambient-orb-one { left: -38vmax; top: 0; background: radial-gradient(ellipse, var(--ambient-pink), transparent 69%); }
-.animated-background--mist-waves .ambient-orb-two { right: -42vmax; top: 32vh; background: radial-gradient(ellipse, var(--ambient-violet), transparent 70%); }
-.animated-background--mist-waves .ambient-orb-three { left: 0; bottom: -16vmax; background: radial-gradient(ellipse, var(--ambient-blue), transparent 72%); }
+.ambient-orb-one { width: 76vmax; height: 36vmax; left: -20vmax; top: -10vmax; background: radial-gradient(ellipse, var(--ambient-pink), transparent 68%); animation: ambient-drift-one 38s ease-in-out infinite; }
+.ambient-orb-two { width: 72vmax; height: 34vmax; right: -26vmax; top: 25vh; background: radial-gradient(ellipse, var(--ambient-violet), transparent 68%); animation: ambient-drift-two 46s ease-in-out infinite; }
+.ambient-orb-three { width: 68vmax; height: 30vmax; left: 10vw; bottom: -12vmax; background: radial-gradient(ellipse, var(--ambient-blue), transparent 70%); animation: ambient-drift-three 42s ease-in-out infinite; }
 @keyframes ambient-drift-one { 0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); } 50% { transform: translate3d(9vw, 8vh, 0) scale(1.08) rotate(8deg); } }
 @keyframes ambient-drift-two { 0%, 100% { transform: translate3d(0, 0, 0) scale(1.04) rotate(0deg); } 50% { transform: translate3d(-10vw, 11vh, 0) scale(.94) rotate(-10deg); } }
 @keyframes ambient-drift-three { 0%, 100% { transform: translate3d(0, 0, 0) scale(.96) rotate(0deg); } 50% { transform: translate3d(8vw, -9vh, 0) scale(1.07) rotate(7deg); } }
