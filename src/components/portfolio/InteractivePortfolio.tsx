@@ -14,6 +14,7 @@ import { sections } from "@/data/sections";
 import { contactLinks } from "@/data/contact";
 import { educationEntries, experienceEntries, galleryEntries, portfolioEntries } from "@/data/details";
 import { contactSubmitAdapter } from "@/lib/contactAdapter";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { DetailEntry, Section, SectionId } from "@/types/content";
 
 type Props = {
@@ -121,6 +122,7 @@ function ContentSection({ section }: { section: Section }) {
 }
 
 export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
+  const showDesktopWheel = useMediaQuery("(min-width: 768px)");
   const scrollToContact = () => {
     const contactIndex = sections.findIndex((section) => section.id === "contact");
     onSelect(contactIndex);
@@ -129,11 +131,12 @@ export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
   return (
     <section className="portfolio-shell" aria-label="Portfolyo içeriği">
       <div className="portfolio-layout">
-        <aside className="sticky-wheel-shell" aria-label="Sticky bölüm navigasyonu">
-          <SectionWheel sections={sections} activeIndex={activeIndex} onSelect={onSelect} />
-          <div className="portfolio-footnote"><IconArrowsVertical size={17} /><span>Kaydırarak döndür</span></div>
-          <span className="mobile-wheel-guide">Kaydırdıkça bölümler değişir</span>
-        </aside>
+        {showDesktopWheel ? (
+          <aside className="sticky-wheel-shell" aria-label="Sticky bölüm navigasyonu">
+            <SectionWheel sections={sections} activeIndex={activeIndex} onSelect={onSelect} />
+            <div className="portfolio-footnote"><IconArrowsVertical size={17} /><span>Kaydırarak döndür</span></div>
+          </aside>
+        ) : null}
         <div className="content-sections">
           {sections.map((section) => <ContentSection key={section.id} section={section} />)}
         </div>
