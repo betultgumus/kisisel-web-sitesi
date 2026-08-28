@@ -128,7 +128,6 @@ export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
 
   return (
     <section className="portfolio-shell" aria-label="Portfolyo içeriği">
-      <div className="portfolio-backdrop" aria-hidden="true"><span /><span /><span /></div>
       <div className="portfolio-layout">
         <aside className="sticky-wheel-shell" aria-label="Sticky bölüm navigasyonu">
           <SectionWheel sections={sections} activeIndex={activeIndex} onSelect={onSelect} />
