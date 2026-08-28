@@ -16,16 +16,21 @@ const compactLabels: Record<string, string> = {
 
 export function CapsuleNavbar({ activeIndex, onSelect, onHome }: Props) {
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const itemsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!window.matchMedia("(max-width: 620px)").matches) return;
-    itemRefs.current[activeIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const container = itemsRef.current;
+    const item = itemRefs.current[activeIndex];
+    if (!container || !item) return;
+    const left = item.offsetLeft - (container.clientWidth - item.offsetWidth) / 2;
+    container.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [activeIndex]);
 
   return (
     <nav className="capsule-nav" aria-label="Ana portfolyo menüsü">
       <button type="button" className="nav-monogram" onClick={onHome} aria-label="Ana sayfaya dön">P.</button>
-      <div className="nav-items">
+      <div ref={itemsRef} className="nav-items">
         {sections.map((section, index) => (
           <button
             ref={(element) => { itemRefs.current[index] = element; }}

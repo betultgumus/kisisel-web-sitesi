@@ -19,7 +19,6 @@ export function Home() {
     activeIndexRef.current = next;
     setActiveIndex(next);
     document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", `#${section.id}`);
   }, []);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ export function Home() {
       if (bestIndex === activeIndexRef.current) return;
       activeIndexRef.current = bestIndex;
       setActiveIndex(bestIndex);
-      window.history.replaceState(null, "", `#${sections[bestIndex].id}`);
     };
 
     const observer = new IntersectionObserver(chooseActiveSection, {
@@ -58,26 +56,13 @@ export function Home() {
     elements.forEach((element) => observer.observe(element));
     chooseActiveSection();
 
-    const hash = window.location.hash.slice(1);
-    const hashIndex = sections.findIndex((section) => section.id === hash);
-    const hashTarget = document.getElementById(hash);
-    const frame = window.requestAnimationFrame(() => {
-      if (hashIndex >= 0) {
-        activeIndexRef.current = hashIndex;
-        setActiveIndex(hashIndex);
-      }
-      hashTarget?.scrollIntoView({ behavior: "auto", block: "start" });
-    });
-
     return () => {
-      window.cancelAnimationFrame(frame);
       observer.disconnect();
     };
   }, []);
 
   const scrollHome = useCallback(() => {
     document.getElementById("hero")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", "#hero");
   }, []);
 
   return (
