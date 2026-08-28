@@ -8,25 +8,34 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
 
 function getViewportHeight() {
   if (typeof window === "undefined") return 900;
-  return Math.round(window.visualViewport?.height ?? window.innerHeight);
+  return Math.round(window.innerHeight);
 }
 
 function useViewportHeight() {
   const [height, setHeight] = useState(getViewportHeight);
+  const widthRef = useRef(typeof window === "undefined" ? 1440 : window.innerWidth);
 
   useEffect(() => {
     let frame = 0;
-    const update = () => {
+    const update = (force = false) => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setHeight(getViewportHeight()));
+      frame = requestAnimationFrame(() => {
+        const nextWidth = window.innerWidth;
+        const mobileViewport = window.matchMedia("(max-width: 620px)").matches;
+        const browserChromeResize = mobileViewport && Math.abs(nextWidth - widthRef.current) < 24;
+        if (!force && browserChromeResize) return;
+        widthRef.current = nextWidth;
+        setHeight(getViewportHeight());
+      });
     };
-    const viewport = window.visualViewport;
-    window.addEventListener("resize", update, { passive: true });
-    viewport?.addEventListener("resize", update, { passive: true });
+    const handleResize = () => update(false);
+    const handleOrientation = () => update(true);
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("orientationchange", handleOrientation, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener("resize", update);
-      viewport?.removeEventListener("resize", update);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleOrientation);
     };
   }, []);
 
@@ -44,8 +53,8 @@ export function CharacterStage() {
   const stage = useMemo(() => {
     if (mobile) {
       const top = clamp(viewportHeight * 0.44, 310, 385);
-      const bottomReserve = 94;
-      const availableHeight = Math.max(220, viewportHeight - top - bottomReserve);
+      const bottomReserve = 168;
+      const availableHeight = Math.max(170, viewportHeight - top - bottomReserve);
       const height = Math.min(330, availableHeight);
       const heightProgress = clamp((viewportHeight - 640) / 200, 0, 1);
       return {

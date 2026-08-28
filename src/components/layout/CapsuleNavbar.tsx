@@ -1,25 +1,38 @@
 import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
 import { sections } from "@/data/sections";
 import { ThemeToggle } from "./ThemeToggle";
 
 type Props = { activeIndex: number; onSelect: (index: number) => void; onHome: () => void };
 
 const compactLabels: Record<string, string> = {
-  about: "Ben",
+  about: "Hakkımda",
   education: "Eğitim",
   experience: "Deneyim",
-  portfolio: "İşler",
+  portfolio: "Portfolyo",
   gallery: "Galeri",
   contact: "İletişim",
 };
 
 export function CapsuleNavbar({ activeIndex, onSelect, onHome }: Props) {
+  const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 620px)").matches) return;
+    itemRefs.current[activeIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [activeIndex]);
+
   return (
     <nav className="capsule-nav" aria-label="Ana portfolyo menüsü">
       <button type="button" className="nav-monogram" onClick={onHome} aria-label="Ana sayfaya dön">P.</button>
       <div className="nav-items">
         {sections.map((section, index) => (
-          <button key={section.id} className={index === activeIndex ? "active" : ""} onClick={() => onSelect(index)}>
+          <button
+            ref={(element) => { itemRefs.current[index] = element; }}
+            key={section.id}
+            className={index === activeIndex ? "active" : ""}
+            onClick={() => onSelect(index)}
+          >
             {index === activeIndex && <motion.span className="nav-pill" layoutId="active-nav" transition={{ type: "spring", stiffness: 380, damping: 36 }} />}
             <span className="nav-label-full">{section.title.replace(" & Sertifikalar", "")}</span>
             <span className="nav-label-compact">{compactLabels[section.id] ?? section.title}</span>

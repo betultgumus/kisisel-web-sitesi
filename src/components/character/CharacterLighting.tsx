@@ -16,16 +16,16 @@ const LIGHT_CHARACTER_LIGHTING = {
 };
 
 const DARK_CHARACTER_LIGHTING = {
-  ambient: 0.5,
-  hemisphere: 0.8,
-  key: 1.82,
-  fill: 1.82,
-  rim: 2.25,
-  sky: "#9bb6e4",
-  ground: "#07111f",
-  keyColor: "#d9e6ff",
-  fillColor: "#8b7de0",
-  rimColor: "#ec4899",
+  ambient: 0.66,
+  hemisphere: 1.02,
+  key: 2.08,
+  fill: 1.98,
+  rim: 2.06,
+  sky: "#dbeafe",
+  ground: "#091829",
+  keyColor: "#eef7ff",
+  fillColor: "#bfdbfe",
+  rimColor: "#93c5fd",
 };
 
 export function CharacterLighting({ theme = "light" }: { theme?: "light" | "dark" }) {
