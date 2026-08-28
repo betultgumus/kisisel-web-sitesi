@@ -15,5 +15,6 @@ export const backgroundVariants = {
 
 export type BackgroundVariant = keyof typeof backgroundVariants;
 
-// Tüm görünümü tek satırdan değiştirmek için bu değeri güncelleyin.
-export const DEFAULT_BACKGROUND_VARIANT: BackgroundVariant = "soft-flow";
+// Variant A ("soft-flow") is intentionally preserved for a future return.
+// Change only this value to switch between the saved background treatments.
+export const DEFAULT_BACKGROUND_VARIANT: BackgroundVariant = "layered-aurora";
