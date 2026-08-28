@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 export function Hero() {
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section id="hero" className="hero" aria-labelledby="hero-title">
       <div className="hero-orbit hero-orbit-one" />
       <div className="hero-orbit hero-orbit-two" />
       <motion.div className="hero-copy" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}>

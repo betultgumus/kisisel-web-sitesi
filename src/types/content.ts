@@ -9,7 +9,6 @@ export type Section = {
   description: string;
   note: string;
   metric: string;
-  route?: string;
 };
 
 export type DetailEntry = {

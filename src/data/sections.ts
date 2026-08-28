@@ -16,7 +16,6 @@ export const sections: Section[] = [
     description: "Eğitim geçmişinizi ve doğrulanabilir sertifikalarınızı özetleyen kısa görünüm.",
     note: "Eğitim ve sertifika bilgileriniz eklenecek.",
     metric: "Sürekli öğrenme",
-    route: "/education",
   },
   {
     id: "experience",
@@ -25,7 +24,6 @@ export const sections: Section[] = [
     description: "Rolünüzü, sorumluluklarınızı ve ölçülebilir katkılarınızı öne çıkaracağınız bölüm.",
     note: "Deneyim detaylarınız eklenecek.",
     metric: "Etki odaklı çalışma",
-    route: "/experience",
   },
   {
     id: "portfolio",
@@ -34,7 +32,6 @@ export const sections: Section[] = [
     description: "Problemi, yaklaşımı ve sonucu net biçimde anlatan çalışmalarınız için vitrin.",
     note: "Proje içerikleriniz ve bağlantılarınız eklenecek.",
     metric: "Fikirden ürüne",
-    route: "/portfolio",
   },
   {
     id: "gallery",
@@ -43,7 +40,6 @@ export const sections: Section[] = [
     description: "Üretim sürecinizden kareler, etkinlikler veya ilham arşiviniz için esnek alan.",
     note: "Galeri görselleriniz eklenecek.",
     metric: "Anlar & süreçler",
-    route: "/gallery",
   },
   {
     id: "contact",

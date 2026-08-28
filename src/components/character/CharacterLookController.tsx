@@ -9,21 +9,14 @@ const HERO_LIMITS = {
   damping: 7.5,
 };
 
-const PORTFOLIO_LIMITS = {
-  yaw: MathUtils.degToRad(8),
-  pitch: MathUtils.degToRad(5),
-  damping: 6.5,
-};
-
 type Props = {
   headTracking: HeadTrackingUniforms;
-  placement: "hero" | "portfolio";
   enabled: boolean;
 };
 
-export function CharacterLookController({ headTracking, placement, enabled }: Props) {
+export function CharacterLookController({ headTracking, enabled }: Props) {
   const mouse = useMouse();
-  const limits = placement === "hero" ? HERO_LIMITS : PORTFOLIO_LIMITS;
+  const limits = HERO_LIMITS;
 
   useFrame((_, delta) => {
     const targetYaw = enabled

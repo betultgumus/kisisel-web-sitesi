@@ -4,13 +4,6 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type Props = { sections: Section[]; activeIndex: number; onSelect: (index: number) => void };
 
-function circularDelta(index: number, active: number, total: number) {
-  let delta = index - active;
-  if (delta > total / 2) delta -= total;
-  if (delta < -total / 2) delta += total;
-  return delta;
-}
-
 export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
   const mobile = useMediaQuery("(max-width: 620px)");
   const compact = useMediaQuery("(max-width: 1100px)");
@@ -32,7 +25,7 @@ export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
         }}
       />
       {sections.map((section, index) => {
-        const delta = circularDelta(index, activeIndex, sections.length);
+        const delta = index - activeIndex;
         const angle = delta * geometry.angleStep;
         const radians = (angle * Math.PI) / 180;
         const x = geometry.centerX + geometry.radiusX * Math.cos(radians);

@@ -1112,19 +1112,6 @@ export default function AuraCursor(props: Props) {
             };
         };
 
-        // The native cursor is only replaced while the pointer is over this
-        // frame — hiding it document-wide would blank it over the whole page
-        // for a component that only owns its own section.
-        const previousCursor = document.documentElement.style.cursor;
-        let cursorHidden = false;
-        const hideNativeCursor = (hide: boolean) => {
-            if (hide === cursorHidden) return;
-            cursorHidden = hide;
-            document.documentElement.style.cursor = hide
-                ? "none"
-                : previousCursor;
-        };
-
         const correctDeltaX = (delta: number) => {
             const aspectRatio = canvas.width / canvas.height;
             return aspectRatio < 1 ? delta * aspectRatio : delta;
@@ -1138,7 +1125,6 @@ export default function AuraCursor(props: Props) {
         // One pointer handler covers mouse, pen and touch.
         const onPointerMove = (e: PointerEvent) => {
             const over = isInsideHoverZone(e.clientX, e.clientY);
-            hideNativeCursor(over);
             // Nothing is shown until the pointer is first seen over the frame.
             if (over) canvas.style.opacity = "1";
             const tc = texcoords(e.clientX, e.clientY);
@@ -1435,7 +1421,6 @@ export default function AuraCursor(props: Props) {
 
         return () => {
             stop();
-            hideNativeCursor(false);
             ro.disconnect();
             io.disconnect();
             document.removeEventListener("visibilitychange", onVisibility);

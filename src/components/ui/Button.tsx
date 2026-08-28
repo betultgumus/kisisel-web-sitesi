@@ -1,13 +1,10 @@
 import { forwardRef, type ButtonHTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "text";
-};
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, variant = "primary", type = "button", ...props },
+  { className = "", type = "button", ...props },
   ref,
 ) {
-  return <button ref={ref} type={type} className={cn(variant === "primary" ? "primary-button" : "text-cta", className)} {...props} />;
+  return <button ref={ref} type={type} className={`primary-button ${className}`.trim()} {...props} />;
 });

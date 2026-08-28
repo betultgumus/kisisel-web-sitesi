@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useState, type CSSProperties } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { CharacterScene } from "./CharacterScene";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useTheme } from "@/providers/ThemeProvider";
@@ -33,11 +33,13 @@ function useViewportHeight() {
   return height;
 }
 
-export function CharacterStage({ placement }: { placement: "hero" | "portfolio" }) {
+export function CharacterStage() {
   const mobile = useMediaQuery("(max-width: 620px)");
   const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const viewportHeight = useViewportHeight();
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(true);
   const { theme } = useTheme();
   const stage = useMemo(() => {
     if (mobile) {
@@ -54,37 +56,45 @@ export function CharacterStage({ placement }: { placement: "hero" | "portfolio" 
       };
     }
 
-    const hero = placement === "hero";
-    const top = clamp(viewportHeight * 0.115, 90, hero ? 112 : 106);
-    const bottomReserve = hero ? 92 : 86;
+    const top = clamp(viewportHeight * 0.115, 90, 112);
+    const bottomReserve = 92;
     const availableHeight = Math.max(420, viewportHeight - top - bottomReserve);
-    const targetHeight = hero
-      ? clamp(2.84 + (availableHeight - 470) * 0.0017, 2.84, 3.38)
-      : clamp(2.76 + (availableHeight - 470) * 0.0015, 2.76, 3.18);
+    const targetHeight = clamp(2.84 + (availableHeight - 470) * 0.0017, 2.84, 3.38);
 
     return { top, height: availableHeight, targetHeight, fov: 36 };
-  }, [mobile, placement, viewportHeight]);
+  }, [mobile, viewportHeight]);
   const stageStyle = {
     "--character-stage-top": `${stage.top}px`,
     "--character-stage-height": `${stage.height}px`,
   } as CSSProperties;
 
+  useEffect(() => {
+    const element = stageRef.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      rootMargin: "100px 0px",
+      threshold: 0,
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={`scene-character ${placement}-character`} style={stageStyle} aria-hidden="true">
+    <div ref={stageRef} className="scene-character hero-character" style={stageStyle} data-rendering={visible ? "active" : "paused"} aria-hidden="true">
       <div className="character-halo" />
       <Canvas
         camera={{ position: [0, 0, 6.6], fov: stage.fov }}
         dpr={mobile ? [1.5, 2] : [1.15, 1.8]}
         gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+        frameloop={visible ? "always" : "never"}
         shadows
       >
         <Suspense fallback={null}>
           <CharacterScene
             theme={theme}
-            placement={placement}
             mobile={mobile}
             targetHeight={stage.targetHeight}
-            trackingEnabled={!mobile && finePointer && !reducedMotion}
+            trackingEnabled={visible && !mobile && finePointer && !reducedMotion}
           />
         </Suspense>
       </Canvas>
