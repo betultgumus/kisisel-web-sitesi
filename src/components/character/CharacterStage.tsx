@@ -6,6 +6,8 @@ import { useTheme } from "@/providers/ThemeProvider";
 
 export function CharacterStage({ placement }: { placement: "hero" | "portfolio" }) {
   const mobile = useMediaQuery("(max-width: 620px)");
+  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const { theme } = useTheme();
 
   return (
@@ -18,7 +20,12 @@ export function CharacterStage({ placement }: { placement: "hero" | "portfolio" 
         shadows
       >
         <Suspense fallback={null}>
-          <CharacterScene theme={theme} placement={placement} mobile={mobile} />
+          <CharacterScene
+            theme={theme}
+            placement={placement}
+            mobile={mobile}
+            trackingEnabled={!mobile && finePointer && !reducedMotion}
+          />
         </Suspense>
       </Canvas>
     </div>

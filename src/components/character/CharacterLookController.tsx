@@ -1,15 +1,41 @@
 import { useFrame } from "@react-three/fiber";
-import type { RefObject } from "react";
-import type { Group } from "three";
+import { MathUtils } from "three";
 import { useMouse } from "@/providers/MouseProvider";
+import type { HeadTrackingUniforms } from "./CharacterModel";
 
-export function CharacterLookController({ target, baseRotation }: { target: RefObject<Group | null>; baseRotation: [number, number] }) {
+const HERO_LIMITS = {
+  yaw: MathUtils.degToRad(12),
+  pitch: MathUtils.degToRad(7),
+  damping: 7.5,
+};
+
+const PORTFOLIO_LIMITS = {
+  yaw: MathUtils.degToRad(8),
+  pitch: MathUtils.degToRad(5),
+  damping: 6.5,
+};
+
+type Props = {
+  headTracking: HeadTrackingUniforms;
+  placement: "hero" | "portfolio";
+  enabled: boolean;
+};
+
+export function CharacterLookController({ headTracking, placement, enabled }: Props) {
   const mouse = useMouse();
-  useFrame(() => {
-    if (!target.current) return;
-    const [baseX, baseY] = baseRotation;
-    target.current.rotation.y += (baseY + mouse.normalizedX.get() * 0.12 - target.current.rotation.y) * 0.04;
-    target.current.rotation.x += (baseX - mouse.normalizedY.get() * 0.035 - target.current.rotation.x) * 0.035;
+  const limits = placement === "hero" ? HERO_LIMITS : PORTFOLIO_LIMITS;
+
+  useFrame((_, delta) => {
+    const targetYaw = enabled
+      ? MathUtils.clamp(mouse.normalizedX.get() * limits.yaw, -limits.yaw, limits.yaw)
+      : 0;
+    const targetPitch = enabled
+      ? MathUtils.clamp(-mouse.normalizedY.get() * limits.pitch, -limits.pitch, limits.pitch)
+      : 0;
+
+    headTracking.yaw.value = MathUtils.damp(headTracking.yaw.value, targetYaw, limits.damping, delta);
+    headTracking.pitch.value = MathUtils.damp(headTracking.pitch.value, targetPitch, limits.damping, delta);
   });
+
   return null;
 }

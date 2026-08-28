@@ -21,6 +21,11 @@ export function MouseProvider({ children }: PropsWithChildren) {
   const [isInteractive, setInteractive] = useState(false);
 
   useEffect(() => {
+    const resetPointer = () => {
+      values.normalizedX.set(0);
+      values.normalizedY.set(0);
+      setInteractive(false);
+    };
     const onPointerMove = (event: PointerEvent) => {
       values.x.set(event.clientX);
       values.y.set(event.clientY);
@@ -30,7 +35,13 @@ export function MouseProvider({ children }: PropsWithChildren) {
       setInteractive(Boolean(target?.closest("a, button, input, textarea, select, [data-interactive]")));
     };
     window.addEventListener("pointermove", onPointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onPointerMove);
+    window.addEventListener("blur", resetPointer);
+    document.documentElement.addEventListener("pointerleave", resetPointer);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("blur", resetPointer);
+      document.documentElement.removeEventListener("pointerleave", resetPointer);
+    };
   }, [values]);
 
   return <MouseContext.Provider value={{ ...values, isInteractive }}>{children}</MouseContext.Provider>;

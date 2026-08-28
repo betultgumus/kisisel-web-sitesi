@@ -1,31 +1,32 @@
 import { ContactShadows } from "@react-three/drei";
-import { useRef } from "react";
-import type { Group } from "three";
+import { useMemo } from "react";
 import { CharacterLighting } from "./CharacterLighting";
 import { CharacterLookController } from "./CharacterLookController";
-import { CharacterModel } from "./CharacterModel";
+import { CharacterModel, type HeadTrackingUniforms } from "./CharacterModel";
 
 type Props = {
   theme: "light" | "dark";
   placement: "hero" | "portfolio";
   mobile: boolean;
+  trackingEnabled: boolean;
 };
 
-export function CharacterScene({ theme, placement, mobile }: Props) {
-  const character = useRef<Group>(null);
-  const targetHeight = placement === "portfolio" ? 3.25 : mobile ? 3.05 : 3.5;
-  const baseRotation: [number, number] = placement === "hero"
-    ? [0.015, Math.PI - 0.14]
-    : [0.01, Math.PI - 0.24];
+export function CharacterScene({ theme, placement, mobile, trackingEnabled }: Props) {
+  const headTracking = useMemo<HeadTrackingUniforms>(() => ({
+    yaw: { value: 0 },
+    pitch: { value: 0 },
+  }), []);
+  const targetHeight = placement === "portfolio" ? 3.05 : mobile ? 2.72 : 3.32;
+  const baseRotationY = placement === "portfolio" ? -0.08 : 0;
   const groundY = -targetHeight / 2;
 
   return (
     <>
       <CharacterLighting theme={theme} />
-      <group ref={character} rotation={[baseRotation[0], baseRotation[1], 0]}>
-        <CharacterModel targetHeight={targetHeight} />
+      <group rotation={[0, baseRotationY, 0]}>
+        <CharacterModel targetHeight={targetHeight} headTracking={headTracking} />
       </group>
-      <CharacterLookController target={character} baseRotation={baseRotation} />
+      <CharacterLookController headTracking={headTracking} placement={placement} enabled={trackingEnabled} />
       <ContactShadows
         position={[0, groundY + 0.015, 0]}
         scale={placement === "hero" ? 3.7 : 3.5}
