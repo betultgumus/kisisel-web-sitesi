@@ -15,6 +15,6 @@ export const backgroundVariants = {
 
 export type BackgroundVariant = keyof typeof backgroundVariants;
 
-// Variant A ("soft-flow") is intentionally preserved for a future return.
-// Change only this value to switch between the saved background treatments.
-export const DEFAULT_BACKGROUND_VARIANT: BackgroundVariant = "layered-aurora";
+// Variants A ("soft-flow") and B ("layered-aurora") are intentionally
+// preserved. Change only this value to return to either saved treatment.
+export const DEFAULT_BACKGROUND_VARIANT: BackgroundVariant = "mist-waves";
