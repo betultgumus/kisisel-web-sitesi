@@ -5,14 +5,19 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconCheck,
+  IconExternalLink,
+  IconFileText,
   IconMail,
+  IconMapPin,
+  IconPhone,
 } from "@tabler/icons-react";
 import { SectionWheel } from "@/components/wheel/SectionWheel";
 import { FloatingDock } from "@/components/dock/FloatingDock";
 import { Button } from "@/components/ui/Button";
 import { sections } from "@/data/sections";
 import { contactLinks } from "@/data/contact";
-import { educationEntries, experienceEntries, galleryEntries, portfolioEntries } from "@/data/details";
+import { certificationEntries, educationEntries, experienceEntries, galleryEntries, portfolioEntries } from "@/data/details";
+import { profile, technicalSkills } from "@/data/portfolio";
 import { contactSubmitAdapter } from "@/lib/contactAdapter";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { DetailEntry, Section, SectionId } from "@/types/content";
@@ -45,7 +50,10 @@ function EntryGrid({ sectionId, entries }: { sectionId: SectionId; entries: Deta
               <small>{entry.meta}</small>
               <h3>{entry.title}</h3>
               <p>{entry.description}</p>
+              {entry.metric ? <strong className="entry-metric">{entry.metric}</strong> : null}
+              {entry.bullets ? <ul className="entry-bullets">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
               {entry.tags ? <div className="tag-list">{entry.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}
+              {entry.href ? <a className="entry-link" href={entry.href} target="_blank" rel="noreferrer">{entry.hrefLabel ?? "Bağlantıyı aç"}<IconExternalLink size={15} aria-hidden="true" /></a> : null}
             </div>
           </div>
         </article>
@@ -71,10 +79,12 @@ function ContactContent() {
 
   return (
     <div className="contact-section-grid">
-      <div className="contact-links" aria-label="İletişim bağlantıları">
-        <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>hello@example.com</span></a>
+      <div className="contact-links" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
+        <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>{contactLinks.emailAddress}</span></a>
+        <a href={contactLinks.phone}><IconPhone aria-hidden="true" /><span><small>Telefon</small>{contactLinks.phoneDisplay}</span></a>
         <a href={contactLinks.github} target="_blank" rel="noreferrer"><IconBrandGithub aria-hidden="true" /><span><small>GitHub</small>Projeleri incele</span></a>
         <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><IconBrandLinkedin aria-hidden="true" /><span><small>LinkedIn</small>Bağlantı kur</span></a>
+        <div className="contact-static"><IconMapPin aria-hidden="true" /><span><small>Konum</small>{contactLinks.location}</span></div>
       </div>
       <div className="inline-contact-form">
         {submitted ? (
@@ -109,12 +119,29 @@ function ContentSection({ section }: { section: Section }) {
         <p className="section-lead">{section.description}</p>
         {section.id === "about" ? (
           <div className="about-detail">
-            <p>{section.note}</p>
-            <div><span>Odak</span><strong>Merak · Üretim · Gelişim</strong></div>
-            <div><span>Yaklaşım</span><strong>Sade, ölçülebilir ve insan odaklı</strong></div>
+            <div className="about-summary">
+              {profile.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <a className="cv-link" href={profile.cvPath} target="_blank" rel="noreferrer" aria-label="Betül Tuba Gümüş güncel CV'sini görüntüle">
+                <IconFileText size={17} aria-hidden="true" /> CV'yi Gör <IconExternalLink size={14} aria-hidden="true" />
+              </a>
+            </div>
+            <div className="skills-grid" aria-label="Teknik yetkinlikler">
+              {technicalSkills.map((group) => (
+                <div className="skill-group" key={group.category}>
+                  <span>{group.category}</span>
+                  <div>{group.items.map((skill) => <strong key={skill}>{skill}</strong>)}</div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : null}
         {entries ? <EntryGrid sectionId={section.id} entries={entries} /> : null}
+        {section.id === "education" ? (
+          <div className="education-subsection">
+            <div className="subsection-heading"><span>Güncel kayıtlar</span><h3>Sertifika & Eğitimler</h3></div>
+            <EntryGrid sectionId="education" entries={certificationEntries} />
+          </div>
+        ) : null}
         {section.id === "contact" ? <ContactContent /> : null}
       </article>
     </section>

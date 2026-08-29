@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { sections } from "@/data/sections";
 import { ThemeToggle } from "./ThemeToggle";
 
-type Props = { activeIndex: number; onSelect: (index: number) => void; onHome: () => void };
+type Props = { activeIndex: number; onSelect: (index: number) => void };
 
 const compactLabels: Record<string, string> = {
   about: "Hakkımda",
@@ -14,7 +14,7 @@ const compactLabels: Record<string, string> = {
   contact: "İletişim",
 };
 
-export function CapsuleNavbar({ activeIndex, onSelect, onHome }: Props) {
+export function CapsuleNavbar({ activeIndex, onSelect }: Props) {
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const itemsRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,6 @@ export function CapsuleNavbar({ activeIndex, onSelect, onHome }: Props) {
 
   return (
     <nav className="capsule-nav" aria-label="Ana portfolyo menüsü">
-      <button type="button" className="nav-monogram" onClick={onHome} aria-label="Ana sayfaya dön">P.</button>
       <div ref={itemsRef} className="nav-items">
         {sections.map((section, index) => (
           <button

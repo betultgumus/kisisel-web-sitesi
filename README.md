@@ -1,13 +1,10 @@
 # Kişisel 3D Portfolyo
 
-React, Vite ve TypeScript ile hazırlanan; tek bir 3D karakter sahnesini Hero'dan interaktif portfolyo alanına taşıyan statik portfolyo prototipi.
+React, Vite ve TypeScript ile hazırlanan; tek bir 3D karakter sahnesi, doğal scroll ve masaüstü bölüm çarkı kullanan Betül Tuba Gümüş kişisel portfolyosu.
 
 ## İçeriği özelleştirme
 
-- Genel bölümler: `src/data/sections.ts`
-- Eğitim, deneyim, proje ve galeri: `src/data/details.ts`
-- Teknolojiler: `src/data/technologies.ts`
-- İletişim bağlantıları: `src/data/contact.ts`
+- Profil, eğitim, deneyim, proje, sertifika, iletişim ve teknolojiler: `src/data/portfolio.ts`
 - Gerçek GLB modeli: `src/components/character/CharacterModel.tsx`
 - Form sağlayıcısı: `src/lib/contactAdapter.ts`
 

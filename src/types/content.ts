@@ -16,6 +16,10 @@ export type DetailEntry = {
   meta: string;
   description: string;
   tags?: string[];
+  bullets?: string[];
+  metric?: string;
+  href?: string;
+  hrefLabel?: string;
 };
 
 export type Technology = {

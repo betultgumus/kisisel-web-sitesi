@@ -1,0 +1,188 @@
+import {
+  SiGit,
+  SiGithub,
+  SiNumpy,
+  SiPandas,
+  SiPlotly,
+  SiPostgresql,
+  SiPython,
+  SiScikitlearn,
+  SiSelenium,
+  SiStreamlit,
+} from "react-icons/si";
+import type { DetailEntry, Section, Technology } from "@/types/content";
+
+export const profile = {
+  fullName: "Betül Tuba Gümüş",
+  title: "Veri Bilimi & Yapay Zekâ",
+  focus: "Veri Bilimi • Makine Öğrenmesi • Yapay Zekâ",
+  heroSummary: "Python ve SQL ile veri analizi ve yapay zekâ projeleri geliştiren Yönetim Bilişim Sistemleri öğrencisi.",
+  about: [
+    "Yönetim Bilişim Sistemleri öğrencisi olarak Python ve SQL ile gerçek veri setleri üzerinde veri analizi, tahminleme ve makine öğrenmesi projeleri geliştiriyorum.",
+    "Data Analytics / AI odağında; karar destek sistemleri ve yapay zekâ çalışmalarında veriyi anlaşılır, ölçülebilir ve uygulanabilir çözümlere dönüştürmeye odaklanıyorum.",
+  ],
+  location: "Bursa, Türkiye",
+  email: "betultgumus@gmail.com",
+  phone: "+90 538 544 78 98",
+  linkedin: "https://linkedin.com/in/betultgumus",
+  github: "https://github.com/betultgumus",
+  cvPath: "/betul-tuba-gumus-cv.pdf",
+} as const;
+
+export const technicalSkills = [
+  { category: "Programlama & Veri", items: ["Python", "Pandas", "NumPy", "Scikit-learn", "SQL", "Excel"] },
+  { category: "Veri Analizi & ML", items: ["EDA", "İstatistiksel Analiz", "Özellik Mühendisliği", "Tahminleme", "Segmentasyon", "Sınıflandırma", "Regresyon", "Kümeleme", "Model Değerlendirme"] },
+  { category: "Derin Öğrenme & Görüntü İşleme", items: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer"] },
+  { category: "Veri Toplama & Görselleştirme", items: ["Selenium", "BeautifulSoup", "Matplotlib", "Seaborn", "Plotly", "Streamlit"] },
+  { category: "Araçlar", items: ["Git", "GitHub"] },
+] as const;
+
+export const educationEntries: DetailEntry[] = [
+  {
+    title: "Bandırma Onyedi Eylül Üniversitesi",
+    meta: "Yönetim Bilişim Sistemleri (Lisans) · 10/2023 – 06/2027",
+    description: "Beklenen mezuniyet: Haziran 2027. GANO: 3,27 / 4,00.",
+    tags: ["Veri Tabanı Yönetim Sistemleri", "İstatistik", "Yazılım Mimarileri", "Veri Tabanı Programlama", "Veri Madenciliği", "Yapay Zekâ Uygulamaları", "Sağlıkta Yapay Zekâ", "Makine Öğrenmesi"],
+  },
+  {
+    title: "Google Yapay Zekâ ve Teknoloji Akademisi",
+    meta: "01/2026 – 08/2026",
+    description: "Girişimcilik, finans, hukuk, insan kaynakları, Google Proje Yönetimi, web uygulama geliştirme ve Derin Öğrenme eğitimleri; Ideathon, Hackathon ve Datathon etkinliklerinde aktif proje geliştirme.",
+    tags: ["Ideathon", "Hackathon", "Datathon", "Proje Yönetimi", "Derin Öğrenme"],
+  },
+];
+
+export const certificationEntries: DetailEntry[] = [
+  { title: "Derin Öğrenme Eğitimi", meta: "Tamamlama Belgesi", description: "Derin öğrenme alanındaki eğitim programının tamamlama belgesi." },
+  { title: "Web Uygulamaları Geliştirme Eğitimi", meta: "Tamamlama Belgesi", description: "Web uygulaması geliştirme eğitim programının tamamlama belgesi." },
+  { title: "Google Proje Yönetimi", meta: "Sertifika", description: "Google Proje Yönetimi eğitimleri kapsamında alınan sertifika." },
+  { title: "Veri Bilimi ve Makine Öğrenmesi 2026", meta: "100 Günlük Kamp", description: "Uygulama ve proje odaklı 100 günlük veri bilimi ve makine öğrenmesi kampı.", href: "https://github.com/betultgumus/100DaysOfDataScience-ML-2026", hrefLabel: "GitHub reposunu aç" },
+];
+
+export const experienceEntries: DetailEntry[] = [
+  {
+    title: "TekNova Profil",
+    meta: "AI Destekli Web Geliştirici · Uzaktan, Serbest · 06/2026 – Devam Ediyor",
+    description: "AI destekli geliştirme araçlarıyla müşteri gereksinimlerine uygun, kullanıcı odaklı dijital çözümler geliştiriyorum.",
+    bullets: [
+      "Web arayüzleri ve kullanıcı odaklı dijital çözümler geliştirme.",
+      "Meta başlık/açıklama, içerik yapısı, mobil uyumluluk ve performans optimizasyonunu kapsayan teknik ve sayfa içi SEO.",
+      "Test, hata giderme ve production deployment süreçlerini yürütme.",
+    ],
+    tags: ["AI Destekli Geliştirme", "SEO", "Responsive UI", "Deployment"],
+  },
+  {
+    title: "Octapull",
+    meta: "Makine Öğrenmesi Stajyeri · Uzaktan · 06/2025 – 08/2026",
+    description: "Görüntü iyileştirme modellerinin geliştirme, eğitim ve değerlendirme süreçlerinde görev aldım.",
+    bullets: [
+      "U-Net, Pix2Pix, ESRGAN ve Restormer tabanlı model geliştirme ve eğitimi.",
+      "Görüntü ön işleme, model eğitimi, inference ve performans değerlendirme.",
+      "PSNR, SSIM ve loss metrikleriyle model karşılaştırması.",
+      "Uzak sunucuda eğitim ve test; Git/GitHub ile versiyon kontrolü.",
+    ],
+    tags: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer", "PSNR", "SSIM"],
+  },
+  {
+    title: "Yönetim Bilişim Sistemleri Topluluğu (YBST)",
+    meta: "Veri Bilimi Ekip Lideri · Bandırma · 12/2025 – 06/2026",
+    description: "Veri bilimi ekibinin iş akışını, görev dağılımını ve proje takvimini yönettim.",
+    bullets: [
+      "Veri temizleme, EDA ve modelleme süreçlerini koordine ederek kod incelemeleri yapma.",
+      "Haftalık görev dağılımı ve proje takvimi yönetimi.",
+      "2026 MII etkinliğinde veri bilimi projelerinin ekip koordinasyonu.",
+    ],
+    tags: ["Ekip Liderliği", "EDA", "Modelleme", "Kod İnceleme"],
+  },
+  {
+    title: "Social Office",
+    meta: "Bilgi Teknolojileri Stajyeri · Uzaktan · 10/2025 – 11/2025",
+    description: "Excel, Python ve Photoshop kullanarak projeler geliştirdim; Excel ile dashboard tasarladım.",
+    tags: ["Excel", "Python", "Photoshop", "Excel Dashboard"],
+  },
+];
+
+export const portfolioEntries: DetailEntry[] = [
+  {
+    title: "7578 sayılı Kanun Kapsamında Karar Destek Sistemi (ANIVIA)",
+    meta: "Yasal uyumluluk · Risk analizi · Karar destek sistemi",
+    description: "1 Mayıs 2026'da yürürlüğe giren 7578 sayılı Kanun kapsamında dijital oyun platformlarının yasal uyumluluğunu değerlendirmek ve risk analizi üretmek için geliştirildi.",
+    bullets: [
+      "Selenium ve BeautifulSoup ile veri toplama; veri temizleme ve ön işleme.",
+      "XGBoost ile risk sınıflandırması ve tehlikeli sınıf için %85 recall.",
+      "K-Means ile 4 ana oyuncu personası; Random Forest ile yeni kullanıcı sınıflandırması.",
+      "Literatür tabanlı ağırlıklarla 100 üzerinden Ebeveyn Denetim Skoru.",
+    ],
+    metric: "%85 recall · 4 persona · 100 üzerinden skor",
+    tags: ["Selenium", "BeautifulSoup", "XGBoost", "K-Means", "Random Forest"],
+    href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
+    hrefLabel: "Projeyi GitHub’da aç",
+  },
+  {
+    title: "Beko Segmentasyon Analizi",
+    meta: "Ürün analizi · Segmentasyon · Dashboard",
+    description: "Beko web sitesinden alınan dinamik ürün verileriyle fiyat/performans temelli segmentasyon analizi.",
+    bullets: [
+      "Selenium ile veri toplama; özellik mühendisliği ve ölçeklendirme.",
+      "Ürün özelliklerine dayalı ürün skoru oluşturma.",
+      "K-Means ile 6 stratejik segment ve Streamlit interaktif dashboard.",
+    ],
+    metric: "6 Stratejik Segment",
+    tags: ["Selenium", "K-Means", "Streamlit", "Özellik Mühendisliği"],
+    href: "https://github.com/betultgumus/ybst-veri-bilimi",
+    hrefLabel: "Projeyi GitHub’da aç",
+  },
+  {
+    title: "Türkiye Dijital Oyun Pazarında Fiyat Analizi",
+    meta: "Fiyat tahmini · Regresyon · Keşifçi veri analizi",
+    description: "Oyun sitelerinden toplanan verilerle oyun fiyatlarını tahmin eden ve regresyon modellerini karşılaştıran analiz.",
+    bullets: [
+      "Selenium ve BeautifulSoup ile veri toplama ve temizleme.",
+      "Özellik mühendisliği ve keşifçi veri analizi.",
+      "Regresyon modellerini MAE, RMSE ve R² metrikleriyle karşılaştırma.",
+    ],
+    metric: "MAE · RMSE · R²",
+    tags: ["Selenium", "BeautifulSoup", "Regresyon", "EDA"],
+    href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/regression-price-model",
+    hrefLabel: "Projeyi GitHub’da aç",
+  },
+];
+
+export const galleryEntries: DetailEntry[] = [
+  { title: "Veri Analizi", meta: "Keşif ve hazırlık", description: "Gerçek veri setlerinde temizleme, özellik mühendisliği ve keşifçi veri analizi süreçleri." },
+  { title: "Makine Öğrenmesi", meta: "Modelleme ve değerlendirme", description: "Sınıflandırma, regresyon ve kümeleme problemlerinde ölçülebilir model karşılaştırmaları." },
+  { title: "Karar Destek Sistemleri", meta: "Veriden karara", description: "Risk, skor ve segmentasyon çıktılarının anlaşılır karar destek araçlarına dönüştürülmesi." },
+];
+
+export const sections: Section[] = [
+  { id: "about", eyebrow: "01 / Tanışalım", title: "Hakkımda", description: "Veri analizi ve yapay zekâ odağımı, kullandığım yöntemleri ve çalışma yaklaşımımı keşfedin.", note: profile.about[0], metric: "Python · SQL · AI" },
+  { id: "education", eyebrow: "02 / Öğrenme yolculuğu", title: "Eğitim & Sertifikalar", description: "Akademik yolculuğum, seçili derslerim ve güncel eğitim kayıtlarım.", note: "", metric: "GANO 3,27 / 4,00" },
+  { id: "experience", eyebrow: "03 / Yolculuk", title: "Deneyim", description: "Web geliştirme, makine öğrenmesi ve veri bilimi ekip liderliği deneyimlerim.", note: "", metric: "4 Güncel Deneyim" },
+  { id: "portfolio", eyebrow: "04 / Seçilmiş işler", title: "Portfolyo", description: "Gerçek veri, ölçülebilir metrikler ve karar destek yaklaşımıyla geliştirdiğim projeler.", note: "", metric: "3 Seçili Proje" },
+  { id: "gallery", eyebrow: "05 / Çalışma alanları", title: "Galeri", description: "Üretim sürecimin veri analizi, modelleme ve karar destek eksenlerinden kısa notlar.", note: "", metric: "Analiz · Model · Karar" },
+  { id: "contact", eyebrow: "06 / Birlikte üretelim", title: "İletişim", description: "Veri analizi, yapay zekâ projeleri veya yeni bir iş birliği için iletişime geçebilirsiniz.", note: "", metric: profile.location },
+];
+
+export const contactLinks = {
+  email: `mailto:${profile.email}`,
+  emailAddress: profile.email,
+  phone: "tel:+905385447898",
+  phoneDisplay: profile.phone,
+  location: profile.location,
+  github: profile.github,
+  linkedin: profile.linkedin,
+  contact: "#contact",
+} as const;
+
+export const technologies: Technology[] = [
+  { name: "Python", icon: SiPython, color: "#3776AB" },
+  { name: "Pandas", icon: SiPandas, color: "#150458" },
+  { name: "NumPy", icon: SiNumpy, color: "#4D77CF" },
+  { name: "Scikit-learn", icon: SiScikitlearn, color: "#F7931E" },
+  { name: "SQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "Git", icon: SiGit, color: "#F05032" },
+  { name: "GitHub", icon: SiGithub, color: "#586069" },
+  { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
+  { name: "Streamlit", icon: SiStreamlit, color: "#FF4B4B" },
+  { name: "Plotly", icon: SiPlotly, color: "#3F4F75" },
+];

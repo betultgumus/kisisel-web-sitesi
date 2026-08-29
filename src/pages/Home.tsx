@@ -61,14 +61,10 @@ export function Home() {
     };
   }, []);
 
-  const scrollHome = useCallback(() => {
-    document.getElementById("hero")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
-
   return (
     <div className="home-page">
       <AnimatedBackground variant={DEFAULT_BACKGROUND_VARIANT} />
-      <CapsuleNavbar activeIndex={activeIndex} onSelect={selectSection} onHome={scrollHome} />
+      <CapsuleNavbar activeIndex={activeIndex} onSelect={selectSection} />
       <Suspense fallback={<div className="scene-character hero-character character-loading" aria-hidden="true" />}>
         <CharacterStage />
       </Suspense>
