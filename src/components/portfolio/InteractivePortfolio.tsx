@@ -1,12 +1,11 @@
 import {
-  IconArrowsVertical,
   IconBrandGithub,
   IconBrandLinkedin,
   IconExternalLink,
   IconMail,
   IconMapPin,
 } from "@tabler/icons-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { FloatingDock } from "@/components/dock/FloatingDock";
 import { ExpandableProjects } from "@/components/projects/ExpandableProjects";
 import { TechnologyStrip } from "@/components/technology/TechnologyStrip";
@@ -162,9 +161,9 @@ function ContactContent() {
         <a className="contact-primary" href={contactLinks.email}><IconMail size={18} aria-hidden="true" /> E-posta gönder</a>
       </div>
       <div className="contact-link-grid" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
-        <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>{contactLinks.emailAddress}</span></a>
-        <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><IconBrandLinkedin aria-hidden="true" /><span><small>LinkedIn</small>Bağlantı kur</span></a>
-        <a href={contactLinks.github} target="_blank" rel="noreferrer"><IconBrandGithub aria-hidden="true" /><span><small>GitHub</small>Projeleri incele</span></a>
+        <a className="contact-glow-card" href={contactLinks.email}><span className="contact-icon"><IconMail aria-hidden="true" /></span><span className="contact-link-copy"><small>E-posta</small>{contactLinks.emailAddress}</span></a>
+        <a className="contact-glow-card" href={contactLinks.linkedin} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandLinkedin aria-hidden="true" /></span><span className="contact-link-copy"><small>LinkedIn</small>Bağlantı kur</span></a>
+        <a className="contact-glow-card" href={contactLinks.github} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandGithub aria-hidden="true" /></span><span className="contact-link-copy"><small>GitHub</small>Projeleri incele</span></a>
       </div>
     </div>
   );
@@ -194,23 +193,6 @@ function ContentSection({ section }: { section: Section }) {
 
 export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
   const showDesktopWheel = useMediaQuery("(min-width: 768px)");
-  const shellRef = useRef<HTMLElement>(null);
-  const [showWheelHint, setShowWheelHint] = useState(false);
-
-  useEffect(() => {
-    const shell = shellRef.current;
-    if (!showDesktopWheel || !shell) {
-      setShowWheelHint(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowWheelHint(entry.isIntersecting),
-      { threshold: 0 },
-    );
-    observer.observe(shell);
-    return () => observer.disconnect();
-  }, [showDesktopWheel]);
 
   const scrollToContact = () => {
     const contactIndex = sections.findIndex((section) => section.id === "contact");
@@ -218,7 +200,7 @@ export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
   };
 
   return (
-    <section ref={shellRef} className="portfolio-shell" aria-label="Portfolyo içeriği">
+    <section className="portfolio-shell" aria-label="Portfolyo içeriği">
       <div className="portfolio-layout">
         {showDesktopWheel ? (
           <aside className="sticky-wheel-shell" aria-label="Sticky bölüm navigasyonu">
@@ -229,11 +211,6 @@ export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
           {sections.map((section) => <ContentSection key={section.id} section={section} />)}
         </div>
       </div>
-      {showDesktopWheel ? (
-        <div className={`portfolio-footnote ${showWheelHint ? "visible" : ""}`} aria-hidden={!showWheelHint}>
-          <IconArrowsVertical size={17} /><span>Kaydırarak döndür</span>
-        </div>
-      ) : null}
       <FloatingDock onOpenContact={scrollToContact} />
     </section>
   );

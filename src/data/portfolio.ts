@@ -53,10 +53,10 @@ export const educationEntries: DetailEntry[] = [
 ];
 
 export const certificationEntries: DetailEntry[] = [
+  { title: "Veri Bilimi ve Makine Öğrenmesi 2026", meta: "100 Günlük Kamp", source: "Atıl Samancıoğlu", description: "Uygulama ve proje odaklı 100 günlük veri bilimi ve makine öğrenmesi kampı.", href: "https://github.com/betultgumus/100DaysOfDataScience-ML-2026", hrefLabel: "GitHub Reposu" },
+  { title: "Google Proje Yönetimi", meta: "Sertifika", source: "Coursera", description: "Google Proje Yönetimi eğitimleri kapsamında alınan sertifika." },
   { title: "Derin Öğrenme Eğitimi", meta: "Tamamlama Belgesi", source: "Google Yapay Zekâ ve Teknoloji Akademisi", description: "Derin öğrenme alanındaki eğitim programının tamamlama belgesi." },
   { title: "Web Uygulamaları Geliştirme Eğitimi", meta: "Tamamlama Belgesi", source: "Google Yapay Zekâ ve Teknoloji Akademisi", description: "Web uygulaması geliştirme eğitim programının tamamlama belgesi." },
-  { title: "Google Proje Yönetimi", meta: "Sertifika", source: "Coursera", description: "Google Proje Yönetimi eğitimleri kapsamında alınan sertifika." },
-  { title: "Veri Bilimi ve Makine Öğrenmesi 2026", meta: "100 Günlük Kamp", source: "Atıl Samancıoğlu", description: "Uygulama ve proje odaklı 100 günlük veri bilimi ve makine öğrenmesi kampı.", href: "https://github.com/betultgumus/100DaysOfDataScience-ML-2026", hrefLabel: "GitHub Reposu" },
 ];
 
 export const experienceEntries: DetailEntry[] = [
@@ -133,7 +133,6 @@ export const portfolioEntries: ProjectEntry[] = [
     tags: ["Selenium", "BeautifulSoup", "XGBoost", "K-Means", "Random Forest"],
     githubUrl: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
     assetType: "none",
-    featured: true,
   },
   {
     title: "Beko Segmentasyon Analizi",

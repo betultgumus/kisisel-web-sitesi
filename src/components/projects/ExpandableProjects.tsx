@@ -103,14 +103,14 @@ export function ExpandableProjects({ projects }: Props) {
       <div className="compact-project-grid">
         {projects.map((project, index) => (
           <motion.article
-            className={`compact-project-card ${project.featured ? "featured" : ""}`}
+            className="compact-project-card"
             key={project.title}
             whileHover={{ y: -3 }}
             transition={{ duration: .2 }}
           >
             <header className="compact-project-header">
               <span>{String(index + 1).padStart(2, "0")}</span>
-              {project.featured ? <small>Öne çıkan proje</small> : project.date ? <time>{project.date}</time> : null}
+              {project.date ? <time>{project.date}</time> : null}
             </header>
             <h3>{project.title}</h3>
             <p>{project.shortDescription}</p>
