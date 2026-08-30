@@ -9,6 +9,8 @@ export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
   const geometry = compact
       ? { centerX: -390, centerY: 245, radiusX: 424, radiusY: 294, angleStep: 18 }
       : { centerX: -350, centerY: 270, radiusX: 475, radiusY: 326, angleStep: 17 };
+  const markerRadius = 7.5;
+  const itemHalfHeight = 22;
   return (
     <div className="section-wheel" aria-label="Bölüm çarkı">
       <div
@@ -25,8 +27,10 @@ export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
         const delta = index - activeIndex;
         const angle = delta * geometry.angleStep;
         const radians = (angle * Math.PI) / 180;
-        const x = geometry.centerX + geometry.radiusX * Math.cos(radians);
-        const y = geometry.centerY + geometry.radiusY * Math.sin(radians);
+        const markerX = geometry.centerX + geometry.radiusX * Math.cos(radians);
+        const markerY = geometry.centerY + geometry.radiusY * Math.sin(radians);
+        const x = markerX - markerRadius;
+        const y = markerY - itemHalfHeight;
         const distance = Math.abs(delta);
         const isActive = index === activeIndex;
         const isNeighbor = distance === 1;

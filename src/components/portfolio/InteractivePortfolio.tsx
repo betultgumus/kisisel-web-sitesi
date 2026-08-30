@@ -6,7 +6,7 @@ import {
   IconMail,
   IconMapPin,
 } from "@tabler/icons-react";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FloatingDock } from "@/components/dock/FloatingDock";
 import { ExpandableProjects } from "@/components/projects/ExpandableProjects";
 import { TechnologyStrip } from "@/components/technology/TechnologyStrip";
@@ -123,13 +123,15 @@ function EducationContent() {
       <div className="education-list" aria-label="Eğitim kayıtları">
         {educationEntries.map((entry) => (
           <article className="education-item" key={entry.title}>
-            <div>
-              <small>{entry.meta}</small>
-              <h3>{entry.role}</h3>
-              <strong className="education-organization">{entry.title}</strong>
-              <p>{entry.description}</p>
-              <TagList tags={entry.tags} />
-            </div>
+            <header className="education-item-header">
+              <div>
+                <h3>{entry.role}</h3>
+                <strong className="education-organization">{entry.title}</strong>
+              </div>
+              <time>{entry.meta}</time>
+            </header>
+            <p>{entry.description}</p>
+            <TagList tags={entry.tags} />
           </article>
         ))}
       </div>
@@ -192,24 +194,46 @@ function ContentSection({ section }: { section: Section }) {
 
 export function InteractivePortfolio({ activeIndex, onSelect }: Props) {
   const showDesktopWheel = useMediaQuery("(min-width: 768px)");
+  const shellRef = useRef<HTMLElement>(null);
+  const [showWheelHint, setShowWheelHint] = useState(false);
+
+  useEffect(() => {
+    const shell = shellRef.current;
+    if (!showDesktopWheel || !shell) {
+      setShowWheelHint(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowWheelHint(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    observer.observe(shell);
+    return () => observer.disconnect();
+  }, [showDesktopWheel]);
+
   const scrollToContact = () => {
     const contactIndex = sections.findIndex((section) => section.id === "contact");
     onSelect(contactIndex);
   };
 
   return (
-    <section className="portfolio-shell" aria-label="Portfolyo içeriği">
+    <section ref={shellRef} className="portfolio-shell" aria-label="Portfolyo içeriği">
       <div className="portfolio-layout">
         {showDesktopWheel ? (
           <aside className="sticky-wheel-shell" aria-label="Sticky bölüm navigasyonu">
             <SectionWheel sections={sections} activeIndex={activeIndex} onSelect={onSelect} />
-            <div className="portfolio-footnote"><IconArrowsVertical size={17} /><span>Kaydırarak döndür</span></div>
           </aside>
         ) : null}
         <div className="content-sections">
           {sections.map((section) => <ContentSection key={section.id} section={section} />)}
         </div>
       </div>
+      {showDesktopWheel ? (
+        <div className={`portfolio-footnote ${showWheelHint ? "visible" : ""}`} aria-hidden={!showWheelHint}>
+          <IconArrowsVertical size={17} /><span>Kaydırarak döndür</span>
+        </div>
+      ) : null}
       <FloatingDock onOpenContact={scrollToContact} />
     </section>
   );

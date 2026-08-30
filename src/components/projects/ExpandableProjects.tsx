@@ -2,8 +2,6 @@ import { AnimatePresence, motion, type PanInfo } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { IconArrowLeft, IconArrowRight, IconExternalLink, IconX } from "@tabler/icons-react";
 import type { DetailEntry } from "@/types/content";
-import { ProjectArchiveFolder } from "./ProjectArchiveFolder";
-import { ProjectImagesBadge } from "./ProjectImagesBadge";
 
 type Props = { projects: DetailEntry[] };
 
@@ -63,7 +61,6 @@ export function ExpandableProjects({ projects }: Props) {
 
   return (
     <div className="projects-experience">
-      <div className="projects-tools"><ProjectImagesBadge projects={projects} /></div>
       <div className="expandable-project-grid">
         {projects.map((project, index) => (
           <motion.button
@@ -86,8 +83,6 @@ export function ExpandableProjects({ projects }: Props) {
           </motion.button>
         ))}
       </div>
-
-      <ProjectArchiveFolder projects={projects} />
 
       <AnimatePresence>
         {activeProject && activeIndex !== null ? (
