@@ -7,10 +7,10 @@ type Props = { activeIndex: number; onSelect: (index: number) => void };
 
 const compactLabels: Record<string, string> = {
   about: "Hakkımda",
-  education: "Eğitim",
+  skills: "Teknik",
   experience: "Deneyim",
-  portfolio: "Portfolyo",
-  gallery: "Galeri",
+  portfolio: "Projeler",
+  education: "Eğitim",
   contact: "İletişim",
 };
 
@@ -38,7 +38,7 @@ export function CapsuleNavbar({ activeIndex, onSelect }: Props) {
             onClick={() => onSelect(index)}
           >
             {index === activeIndex && <motion.span className="nav-pill" layoutId="active-nav" transition={{ type: "spring", stiffness: 380, damping: 36 }} />}
-            <span className="nav-label-full">{section.title.replace(" & Sertifikalar", "")}</span>
+            <span className="nav-label-full">{section.shortTitle ?? section.title}</span>
             <span className="nav-label-compact">{compactLabels[section.id] ?? section.title}</span>
           </button>
         ))}

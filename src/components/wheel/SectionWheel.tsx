@@ -45,9 +45,10 @@ export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
             aria-current={isActive ? "true" : undefined}
             data-angle={angle}
             data-distance={distance}
+            data-section={section.id}
           >
             <span className="wheel-dot" />
-            <span className="wheel-label">{section.title.replace(" & Sertifikalar", "")}</span>
+            <span className="wheel-label">{section.shortTitle ?? section.title}</span>
           </motion.button>
         );
       })}

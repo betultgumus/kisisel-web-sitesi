@@ -1,7 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { AnimatedBackground } from "@/components/background/AnimatedBackground";
 import { Hero } from "@/components/hero/Hero";
-import { TechnologyStrip } from "@/components/technology/TechnologyStrip";
 import { InteractivePortfolio } from "@/components/portfolio/InteractivePortfolio";
 import { CapsuleNavbar } from "@/components/layout/CapsuleNavbar";
 import { sections } from "@/data/sections";
@@ -69,7 +68,6 @@ export function Home() {
         <CharacterStage />
       </Suspense>
       <Hero />
-      <TechnologyStrip />
       <InteractivePortfolio activeIndex={activeIndex} onSelect={selectSection} />
     </div>
   );

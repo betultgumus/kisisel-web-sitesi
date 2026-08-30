@@ -1,60 +1,106 @@
-import { useState, type FormEvent } from "react";
 import {
-  IconArrowRight,
   IconArrowsVertical,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconCheck,
   IconExternalLink,
   IconFileText,
   IconMail,
   IconMapPin,
   IconPhone,
 } from "@tabler/icons-react";
-import { SectionWheel } from "@/components/wheel/SectionWheel";
 import { FloatingDock } from "@/components/dock/FloatingDock";
-import { Button } from "@/components/ui/Button";
-import { sections } from "@/data/sections";
+import { TechnologyStrip } from "@/components/technology/TechnologyStrip";
+import { SectionWheel } from "@/components/wheel/SectionWheel";
 import { contactLinks } from "@/data/contact";
-import { certificationEntries, educationEntries, experienceEntries, galleryEntries, portfolioEntries } from "@/data/details";
+import { certificationEntries, educationEntries, experienceEntries, portfolioEntries } from "@/data/details";
 import { profile, technicalSkills } from "@/data/portfolio";
-import { contactSubmitAdapter } from "@/lib/contactAdapter";
+import { sections } from "@/data/sections";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import type { DetailEntry, Section, SectionId } from "@/types/content";
+import type { DetailEntry, Section } from "@/types/content";
 
 type Props = {
   activeIndex: number;
   onSelect: (index: number) => void;
 };
 
-const entriesBySection: Partial<Record<SectionId, DetailEntry[]>> = {
-  education: educationEntries,
-  experience: experienceEntries,
-  portfolio: portfolioEntries,
-  gallery: galleryEntries,
-};
+function TagList({ tags }: { tags?: string[] }) {
+  if (!tags?.length) return null;
+  return <div className="tag-list">{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>;
+}
 
-function EntryGrid({ sectionId, entries }: { sectionId: SectionId; entries: DetailEntry[] }) {
+function SectionHeader({ section }: { section: Section }) {
   return (
-    <div className={`section-entry-grid ${sectionId}`}>
-      {entries.map((entry, index) => (
-        <article className="section-entry" key={`${entry.title}-${index}`}>
-          {sectionId === "gallery" ? (
-            <div className="section-gallery-visual" aria-hidden="true">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </div>
-          ) : null}
-          <div className="section-entry-copy">
-            <span className="entry-index">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <small>{entry.meta}</small>
-              <h3>{entry.title}</h3>
-              <p>{entry.description}</p>
-              {entry.metric ? <strong className="entry-metric">{entry.metric}</strong> : null}
-              {entry.bullets ? <ul className="entry-bullets">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
-              {entry.tags ? <div className="tag-list">{entry.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}
-              {entry.href ? <a className="entry-link" href={entry.href} target="_blank" rel="noreferrer">{entry.hrefLabel ?? "Bağlantıyı aç"}<IconExternalLink size={15} aria-hidden="true" /></a> : null}
-            </div>
+    <header className="section-heading">
+      <div className="section-topline"><span>{section.eyebrow}</span><span>{section.metric}</span></div>
+      <h2 id={`${section.id}-title`}>{section.title}</h2>
+      <p className="section-lead">{section.description}</p>
+    </header>
+  );
+}
+
+function AboutContent() {
+  const facts = [
+    { label: "Konum", value: profile.location },
+    { label: "Alan", value: "Veri Bilimi / Makine Öğrenmesi / Yapay Zekâ" },
+    { label: "Odak", value: "Data Analytics / AI" },
+  ];
+
+  return (
+    <div className="about-editorial">
+      <div className="about-narrative">
+        {profile.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <a className="cv-link" href={profile.cvPath} target="_blank" rel="noreferrer" aria-label="Betül Tuba Gümüş güncel CV'sini görüntüle">
+          <IconFileText size={17} aria-hidden="true" /> CV'yi Gör <IconExternalLink size={14} aria-hidden="true" />
+        </a>
+      </div>
+      <div className="profile-facts" aria-label="Profil özeti">
+        {facts.map((fact) => (
+          <div className="profile-fact" key={fact.label}>
+            <span>{fact.label}</span>
+            <strong>{fact.value}</strong>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SkillsContent() {
+  return (
+    <div className="skills-content">
+      <div className="skills-section-grid" aria-label="Teknik yetkinlik kategorileri">
+        {technicalSkills.map((group, index) => (
+          <article className={`skill-category skill-category-${index + 1}`} key={group.category}>
+            <span className="skill-category-index">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{group.category}</h3>
+            <div className="skill-chip-list">{group.items.map((skill) => <span key={skill}>{skill}</span>)}</div>
+          </article>
+        ))}
+      </div>
+      <TechnologyStrip />
+    </div>
+  );
+}
+
+function ExperienceTimeline() {
+  return (
+    <div className="experience-timeline">
+      {experienceEntries.map((entry, index) => (
+        <article className="timeline-item" key={entry.title}>
+          <span className="timeline-marker" aria-hidden="true"><i /></span>
+          <div className="timeline-card">
+            <header className="timeline-card-header">
+              <div>
+                <span className="timeline-role">{entry.role}</span>
+                <h3>{entry.title}</h3>
+              </div>
+              <time>{entry.period}</time>
+            </header>
+            <div className="timeline-location"><IconMapPin size={14} aria-hidden="true" />{entry.location}</div>
+            <p>{entry.description}</p>
+            {entry.bullets ? <ul className="entry-bullets">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
+            <TagList tags={entry.tags} />
+            <span className="timeline-count" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </div>
         </article>
       ))}
@@ -62,87 +108,108 @@ function EntryGrid({ sectionId, entries }: { sectionId: SectionId; entries: Deta
   );
 }
 
-function ContactContent() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!event.currentTarget.checkValidity()) return;
-    const data = new FormData(event.currentTarget);
-    await contactSubmitAdapter({
-      name: String(data.get("name") ?? ""),
-      email: String(data.get("email") ?? ""),
-      message: String(data.get("message") ?? ""),
-    });
-    setSubmitted(true);
-  };
-
+function ProjectHighlights({ highlights }: Pick<DetailEntry, "highlights">) {
+  if (!highlights?.length) return null;
   return (
-    <div className="contact-section-grid">
-      <div className="contact-links" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
-        <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>{contactLinks.emailAddress}</span></a>
-        <a href={contactLinks.phone}><IconPhone aria-hidden="true" /><span><small>Telefon</small>{contactLinks.phoneDisplay}</span></a>
-        <a href={contactLinks.github} target="_blank" rel="noreferrer"><IconBrandGithub aria-hidden="true" /><span><small>GitHub</small>Projeleri incele</span></a>
-        <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><IconBrandLinkedin aria-hidden="true" /><span><small>LinkedIn</small>Bağlantı kur</span></a>
-        <div className="contact-static"><IconMapPin aria-hidden="true" /><span><small>Konum</small>{contactLinks.location}</span></div>
-      </div>
-      <div className="inline-contact-form">
-        {submitted ? (
-          <div className="inline-form-success">
-            <IconCheck aria-hidden="true" />
-            <h3>Form arayüzü hazır.</h3>
-            <p>Gönderim sağlayıcısı bağlandığında mesajınız doğrudan iletilecek. Şimdilik e-posta bağlantısını kullanabilirsiniz.</p>
-            <Button onClick={() => setSubmitted(false)}>Forma dön</Button>
+    <ul className="project-highlights">
+      {highlights.map((highlight) => (
+        <li key={highlight.value}><strong>{highlight.value}</strong><span>{highlight.text}</span></li>
+      ))}
+    </ul>
+  );
+}
+
+function ProjectShowcase() {
+  return (
+    <div className="project-showcase">
+      {portfolioEntries.map((entry, index) => (
+        <article className={`project-card ${index === 0 ? "featured" : ""}`} key={entry.title}>
+          <div className="project-card-topline"><span>{String(index + 1).padStart(2, "0")}</span><small>{entry.meta}</small></div>
+          <h3>{entry.title}</h3>
+          <p>{entry.description}</p>
+          {entry.bullets ? <ul className="project-details">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
+          <ProjectHighlights highlights={entry.highlights} />
+          <div className="project-card-footer">
+            <TagList tags={entry.tags} />
+            {entry.href ? <a className="entry-link" href={entry.href} target="_blank" rel="noreferrer">GitHub <IconExternalLink size={15} aria-hidden="true" /></a> : null}
           </div>
-        ) : (
-          <form onSubmit={submit}>
-            <h3>Bir fikriniz mi var?</h3>
-            <p>Yeni bir proje, iş birliği veya yalnızca merhaba demek için mesaj bırakın.</p>
-            <label>Adınız<input name="name" required autoComplete="name" placeholder="Ad Soyad" /></label>
-            <label>E-posta<input type="email" name="email" required autoComplete="email" placeholder="siz@example.com" /></label>
-            <label>Mesajınız<textarea name="message" required minLength={10} rows={4} placeholder="Kısaca anlatın…" /></label>
-            <Button type="submit">Devam et <IconArrowRight size={18} /></Button>
-          </form>
-        )}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function EducationContent() {
+  return (
+    <div className="education-content">
+      <div className="education-list" aria-label="Eğitim kayıtları">
+        {educationEntries.map((entry, index) => (
+          <article className="education-item" key={entry.title}>
+            <span className="education-index">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <small>{entry.meta}</small>
+              <h3>{entry.title}</h3>
+              <p>{entry.description}</p>
+              <TagList tags={entry.tags} />
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="certificate-area">
+        <div className="subsection-heading"><span>Güncel kayıtlar</span><h3>Sertifika & Eğitimler</h3></div>
+        <div className="certificate-grid">
+          {certificationEntries.map((entry, index) => (
+            <article className="certificate-card" key={entry.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{entry.meta}</small>
+              <h4>{entry.title}</h4>
+              {entry.href ? <a href={entry.href} target="_blank" rel="noreferrer" aria-label={`${entry.title} GitHub reposunu aç`}><IconExternalLink size={15} aria-hidden="true" /></a> : null}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
+function ContactContent() {
+  return (
+    <div className="contact-editorial">
+      <div className="contact-callout">
+        <span>{profile.fullName}</span>
+        <h3>Veri odaklı bir fikir üzerinde birlikte çalışalım.</h3>
+        <p>Veri analizi, makine öğrenmesi ve yapay zekâ projeleri için doğrudan iletişime geçebilirsiniz.</p>
+        <a className="contact-primary" href={contactLinks.email}><IconMail size={18} aria-hidden="true" /> E-posta gönder</a>
+      </div>
+      <div className="contact-link-grid" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
+        <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>{contactLinks.emailAddress}</span></a>
+        <a href={contactLinks.phone}><IconPhone aria-hidden="true" /><span><small>Telefon</small>{contactLinks.phoneDisplay}</span></a>
+        <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><IconBrandLinkedin aria-hidden="true" /><span><small>LinkedIn</small>Bağlantı kur</span></a>
+        <a href={contactLinks.github} target="_blank" rel="noreferrer"><IconBrandGithub aria-hidden="true" /><span><small>GitHub</small>Projeleri incele</span></a>
+        <div className="contact-static"><IconMapPin aria-hidden="true" /><span><small>Konum</small>{contactLinks.location}</span></div>
+        <a href={profile.cvPath} target="_blank" rel="noreferrer"><IconFileText aria-hidden="true" /><span><small>Özgeçmiş</small>CV'yi görüntüle</span></a>
+      </div>
+    </div>
+  );
+}
+
+function SectionContent({ section }: { section: Section }) {
+  switch (section.id) {
+    case "about": return <AboutContent />;
+    case "skills": return <SkillsContent />;
+    case "experience": return <ExperienceTimeline />;
+    case "portfolio": return <ProjectShowcase />;
+    case "education": return <EducationContent />;
+    case "contact": return <ContactContent />;
+  }
+}
+
 function ContentSection({ section }: { section: Section }) {
-  const entries = entriesBySection[section.id];
   return (
     <section id={section.id} className={`content-section content-section-${section.id}`} aria-labelledby={`${section.id}-title`}>
-      <article className="section-glass glass3d">
-        <div className="section-topline"><span>{section.eyebrow}</span><span>{section.metric}</span></div>
-        <h2 id={`${section.id}-title`}>{section.title}</h2>
-        <p className="section-lead">{section.description}</p>
-        {section.id === "about" ? (
-          <div className="about-detail">
-            <div className="about-summary">
-              {profile.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              <a className="cv-link" href={profile.cvPath} target="_blank" rel="noreferrer" aria-label="Betül Tuba Gümüş güncel CV'sini görüntüle">
-                <IconFileText size={17} aria-hidden="true" /> CV'yi Gör <IconExternalLink size={14} aria-hidden="true" />
-              </a>
-            </div>
-            <div className="skills-grid" aria-label="Teknik yetkinlikler">
-              {technicalSkills.map((group) => (
-                <div className="skill-group" key={group.category}>
-                  <span>{group.category}</span>
-                  <div>{group.items.map((skill) => <strong key={skill}>{skill}</strong>)}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : null}
-        {entries ? <EntryGrid sectionId={section.id} entries={entries} /> : null}
-        {section.id === "education" ? (
-          <div className="education-subsection">
-            <div className="subsection-heading"><span>Güncel kayıtlar</span><h3>Sertifika & Eğitimler</h3></div>
-            <EntryGrid sectionId="education" entries={certificationEntries} />
-          </div>
-        ) : null}
-        {section.id === "contact" ? <ContactContent /> : null}
+      <article className={`section-glass glass3d section-glass-${section.id}`}>
+        <SectionHeader section={section} />
+        <SectionContent section={section} />
       </article>
     </section>
   );

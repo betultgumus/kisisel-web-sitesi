@@ -21,13 +21,13 @@ function TechnologyGroup({ duplicate = false }: { duplicate?: boolean }) {
 
 export function TechnologyStrip() {
   return (
-    <section id="technologies" className="technology-transition" aria-label="Kullandığım teknolojiler">
+    <div className="technology-transition" aria-label="Kullandığım teknolojiler">
       <div className="marquee-mask">
         <div className="marquee-track">
           <TechnologyGroup />
           <TechnologyGroup duplicate />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

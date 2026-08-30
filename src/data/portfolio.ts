@@ -31,7 +31,7 @@ export const profile = {
 
 export const technicalSkills = [
   { category: "Programlama & Veri", items: ["Python", "Pandas", "NumPy", "Scikit-learn", "SQL", "Excel"] },
-  { category: "Veri Analizi & ML", items: ["EDA", "İstatistiksel Analiz", "Özellik Mühendisliği", "Tahminleme", "Segmentasyon", "Sınıflandırma", "Regresyon", "Kümeleme", "Model Değerlendirme"] },
+  { category: "Veri Analizi & Makine Öğrenmesi", items: ["EDA", "İstatistiksel Analiz", "Özellik Mühendisliği", "Tahminleme", "Segmentasyon", "Sınıflandırma", "Regresyon", "Kümeleme", "Model Değerlendirme"] },
   { category: "Derin Öğrenme & Görüntü İşleme", items: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer"] },
   { category: "Veri Toplama & Görselleştirme", items: ["Selenium", "BeautifulSoup", "Matplotlib", "Seaborn", "Plotly", "Streamlit"] },
   { category: "Araçlar", items: ["Git", "GitHub"] },
@@ -63,6 +63,9 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "TekNova Profil",
     meta: "AI Destekli Web Geliştirici · Uzaktan, Serbest · 06/2026 – Devam Ediyor",
+    role: "AI Destekli Web Geliştirici",
+    location: "Uzaktan, Serbest",
+    period: "06/2026 – Devam Ediyor",
     description: "AI destekli geliştirme araçlarıyla müşteri gereksinimlerine uygun, kullanıcı odaklı dijital çözümler geliştiriyorum.",
     bullets: [
       "Web arayüzleri ve kullanıcı odaklı dijital çözümler geliştirme.",
@@ -74,6 +77,9 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "Octapull",
     meta: "Makine Öğrenmesi Stajyeri · Uzaktan · 06/2025 – 08/2026",
+    role: "Makine Öğrenmesi Stajyeri",
+    location: "Uzaktan",
+    period: "06/2025 – 08/2026",
     description: "Görüntü iyileştirme modellerinin geliştirme, eğitim ve değerlendirme süreçlerinde görev aldım.",
     bullets: [
       "U-Net, Pix2Pix, ESRGAN ve Restormer tabanlı model geliştirme ve eğitimi.",
@@ -81,11 +87,14 @@ export const experienceEntries: DetailEntry[] = [
       "PSNR, SSIM ve loss metrikleriyle model karşılaştırması.",
       "Uzak sunucuda eğitim ve test; Git/GitHub ile versiyon kontrolü.",
     ],
-    tags: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer", "PSNR", "SSIM"],
+    tags: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer", "PSNR", "SSIM", "Git", "GitHub"],
   },
   {
     title: "Yönetim Bilişim Sistemleri Topluluğu (YBST)",
     meta: "Veri Bilimi Ekip Lideri · Bandırma · 12/2025 – 06/2026",
+    role: "Veri Bilimi Ekip Lideri",
+    location: "Bandırma",
+    period: "12/2025 – 06/2026",
     description: "Veri bilimi ekibinin iş akışını, görev dağılımını ve proje takvimini yönettim.",
     bullets: [
       "Veri temizleme, EDA ve modelleme süreçlerini koordine ederek kod incelemeleri yapma.",
@@ -97,6 +106,9 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "Social Office",
     meta: "Bilgi Teknolojileri Stajyeri · Uzaktan · 10/2025 – 11/2025",
+    role: "Bilgi Teknolojileri Stajyeri",
+    location: "Uzaktan",
+    period: "10/2025 – 11/2025",
     description: "Excel, Python ve Photoshop kullanarak projeler geliştirdim; Excel ile dashboard tasarladım.",
     tags: ["Excel", "Python", "Photoshop", "Excel Dashboard"],
   },
@@ -113,7 +125,11 @@ export const portfolioEntries: DetailEntry[] = [
       "K-Means ile 4 ana oyuncu personası; Random Forest ile yeni kullanıcı sınıflandırması.",
       "Literatür tabanlı ağırlıklarla 100 üzerinden Ebeveyn Denetim Skoru.",
     ],
-    metric: "%85 recall · 4 persona · 100 üzerinden skor",
+    highlights: [
+      { value: "%85 recall", text: "XGBoost modelinin tehlikeli sınıftaki geri çağırma başarısı." },
+      { value: "4 ana persona", text: "K-Means ile ortaya çıkarılan oyuncu davranış kümeleri." },
+      { value: "100 üzerinden skor", text: "Literatür tabanlı Ebeveyn Denetim Skoru." },
+    ],
     tags: ["Selenium", "BeautifulSoup", "XGBoost", "K-Means", "Random Forest"],
     href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
     hrefLabel: "Projeyi GitHub’da aç",
@@ -127,7 +143,9 @@ export const portfolioEntries: DetailEntry[] = [
       "Ürün özelliklerine dayalı ürün skoru oluşturma.",
       "K-Means ile 6 stratejik segment ve Streamlit interaktif dashboard.",
     ],
-    metric: "6 Stratejik Segment",
+    highlights: [
+      { value: "6 stratejik segment", text: "K-Means ile oluşturulan fiyat/performans grupları." },
+    ],
     tags: ["Selenium", "K-Means", "Streamlit", "Özellik Mühendisliği"],
     href: "https://github.com/betultgumus/ybst-veri-bilimi",
     hrefLabel: "Projeyi GitHub’da aç",
@@ -141,26 +159,22 @@ export const portfolioEntries: DetailEntry[] = [
       "Özellik mühendisliği ve keşifçi veri analizi.",
       "Regresyon modellerini MAE, RMSE ve R² metrikleriyle karşılaştırma.",
     ],
-    metric: "MAE · RMSE · R²",
+    highlights: [
+      { value: "MAE, RMSE ve R²", text: "Regresyon modellerinin karşılaştırıldığı değerlendirme metrikleri." },
+    ],
     tags: ["Selenium", "BeautifulSoup", "Regresyon", "EDA"],
     href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/regression-price-model",
     hrefLabel: "Projeyi GitHub’da aç",
   },
 ];
 
-export const galleryEntries: DetailEntry[] = [
-  { title: "Veri Analizi", meta: "Keşif ve hazırlık", description: "Gerçek veri setlerinde temizleme, özellik mühendisliği ve keşifçi veri analizi süreçleri." },
-  { title: "Makine Öğrenmesi", meta: "Modelleme ve değerlendirme", description: "Sınıflandırma, regresyon ve kümeleme problemlerinde ölçülebilir model karşılaştırmaları." },
-  { title: "Karar Destek Sistemleri", meta: "Veriden karara", description: "Risk, skor ve segmentasyon çıktılarının anlaşılır karar destek araçlarına dönüştürülmesi." },
-];
-
 export const sections: Section[] = [
-  { id: "about", eyebrow: "01 / Tanışalım", title: "Hakkımda", description: "Veri analizi ve yapay zekâ odağımı, kullandığım yöntemleri ve çalışma yaklaşımımı keşfedin.", note: profile.about[0], metric: "Python · SQL · AI" },
-  { id: "education", eyebrow: "02 / Öğrenme yolculuğu", title: "Eğitim & Sertifikalar", description: "Akademik yolculuğum, seçili derslerim ve güncel eğitim kayıtlarım.", note: "", metric: "GANO 3,27 / 4,00" },
-  { id: "experience", eyebrow: "03 / Yolculuk", title: "Deneyim", description: "Web geliştirme, makine öğrenmesi ve veri bilimi ekip liderliği deneyimlerim.", note: "", metric: "4 Güncel Deneyim" },
-  { id: "portfolio", eyebrow: "04 / Seçilmiş işler", title: "Portfolyo", description: "Gerçek veri, ölçülebilir metrikler ve karar destek yaklaşımıyla geliştirdiğim projeler.", note: "", metric: "3 Seçili Proje" },
-  { id: "gallery", eyebrow: "05 / Çalışma alanları", title: "Galeri", description: "Üretim sürecimin veri analizi, modelleme ve karar destek eksenlerinden kısa notlar.", note: "", metric: "Analiz · Model · Karar" },
-  { id: "contact", eyebrow: "06 / Birlikte üretelim", title: "İletişim", description: "Veri analizi, yapay zekâ projeleri veya yeni bir iş birliği için iletişime geçebilirsiniz.", note: "", metric: profile.location },
+  { id: "about", eyebrow: "02 / Profil", title: "Hakkımda", description: "Veri analizi ve yapay zekâ odağımı, kullandığım yöntemleri ve çalışma yaklaşımımı keşfedin.", note: profile.about[0], metric: "Python · SQL · AI" },
+  { id: "skills", eyebrow: "03 / Teknik Yetkinlikler", title: "Teknik Yetkinlikler", shortTitle: "Teknik Yetkinlikler", description: "Veri toplama ve analizden makine öğrenmesi ile görüntü işlemeye uzanan güncel teknik araç setim.", note: "", metric: "5 Yetkinlik Alanı" },
+  { id: "experience", eyebrow: "04 / Uygulama", title: "Deneyim", description: "Web geliştirme, makine öğrenmesi ve veri bilimi ekip liderliği deneyimlerim.", note: "", metric: "4 Güncel Deneyim" },
+  { id: "portfolio", eyebrow: "05 / Seçilmiş İşler", title: "Projeler", description: "Gerçek veri, ölçülebilir sonuçlar ve karar destek yaklaşımıyla geliştirdiğim projeler.", note: "", metric: "3 Seçili Proje" },
+  { id: "education", eyebrow: "06 / Öğrenme Yolculuğu", title: "Eğitim & Sertifikalar", shortTitle: "Eğitim", description: "Akademik yolculuğum, seçili derslerim ve güncel eğitim kayıtlarım.", note: "", metric: "GANO 3,27 / 4,00" },
+  { id: "contact", eyebrow: "07 / Birlikte Üretelim", title: "İletişim", description: "Veri analizi, yapay zekâ projeleri veya yeni bir iş birliği için iletişime geçebilirsiniz.", note: "", metric: profile.location },
 ];
 
 export const contactLinks = {
