@@ -156,14 +156,14 @@ function ContactContent() {
     <div className="contact-editorial">
       <div className="contact-callout">
         <span>{profile.fullName}</span>
-        <h3>Veri odaklı bir fikir üzerinde birlikte çalışalım.</h3>
-        <p>Veri analizi, makine öğrenmesi ve yapay zekâ projeleri için doğrudan iletişime geçebilirsiniz.</p>
+        <h3>Data - AI - Web</h3>
+        <p>İş teklifleri ve birlikte proje geliştirmek için iletişime geçebilirsiniz.</p>
         <a className="contact-primary" href={contactLinks.email}><IconMail size={18} aria-hidden="true" /> E-posta gönder</a>
       </div>
       <div className="contact-link-grid" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
-        <a className="contact-glow-card" href={contactLinks.email}><span className="contact-icon"><IconMail aria-hidden="true" /></span><span className="contact-link-copy"><small>E-posta</small>{contactLinks.emailAddress}</span></a>
-        <a className="contact-glow-card" href={contactLinks.linkedin} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandLinkedin aria-hidden="true" /></span><span className="contact-link-copy"><small>LinkedIn</small>Bağlantı kur</span></a>
-        <a className="contact-glow-card" href={contactLinks.github} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandGithub aria-hidden="true" /></span><span className="contact-link-copy"><small>GitHub</small>Projeleri incele</span></a>
+        <a href={contactLinks.email}><span className="contact-icon"><IconMail aria-hidden="true" /></span><span className="contact-link-copy"><small>E-posta</small>{contactLinks.emailAddress}</span></a>
+        <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandLinkedin aria-hidden="true" /></span><span className="contact-link-copy"><small>LinkedIn</small>Bağlantı kur</span></a>
+        <a href={contactLinks.github} target="_blank" rel="noreferrer"><span className="contact-icon"><IconBrandGithub aria-hidden="true" /></span><span className="contact-link-copy"><small>GitHub</small>Projeleri incele</span></a>
       </div>
     </div>
   );
