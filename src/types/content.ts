@@ -25,6 +25,25 @@ export type DetailEntry = {
   hrefLabel?: string;
 };
 
+export type ProjectAssetType = "image" | "pdf" | "none";
+
+export type ProjectEntry = {
+  title: string;
+  shortDescription: string;
+  detailDescription: string;
+  tags: string[];
+  githubUrl: string;
+  assetType: ProjectAssetType;
+  assetSrc?: string;
+  assetAlt?: string;
+  notes?: string;
+  extraText?: string;
+  date?: string;
+  featured?: boolean;
+  bullets?: string[];
+  highlights?: Array<{ value: string; text: string }>;
+};
+
 export type Technology = {
   name: string;
   icon: IconType;

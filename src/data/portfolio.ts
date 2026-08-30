@@ -10,7 +10,7 @@ import {
   SiStreamlit,
 } from "react-icons/si";
 import { PiMicrosoftExcelLogo } from "react-icons/pi";
-import type { DetailEntry, Section, Technology } from "@/types/content";
+import type { DetailEntry, ProjectEntry, Section, Technology } from "@/types/content";
 
 export const profile = {
   fullName: "Betül Tuba Gümüş",
@@ -114,11 +114,11 @@ export const experienceEntries: DetailEntry[] = [
   },
 ];
 
-export const portfolioEntries: DetailEntry[] = [
+export const portfolioEntries: ProjectEntry[] = [
   {
     title: "7578 sayılı Kanun Kapsamında Karar Destek Sistemi (ANIVIA)",
-    meta: "Yasal uyumluluk · Risk analizi · Karar destek sistemi",
-    description: "1 Mayıs 2026'da yürürlüğe giren 7578 sayılı Kanun kapsamında dijital oyun platformlarının yasal uyumluluğunu değerlendirmek ve risk analizi üretmek için geliştirildi.",
+    shortDescription: "Dijital oyun platformlarının yasal uyumluluğunu değerlendiren, Web Scraping ve makine öğrenmesi tabanlı karar destek sistemi.",
+    detailDescription: "1 Mayıs 2026'da yürürlüğe giren 7578 sayılı Kanun kapsamında dijital oyun platformlarının yasal uyumluluğunu değerlendirmek ve risk analizi üretmek için geliştirildi.",
     bullets: [
       "Selenium ve BeautifulSoup ile veri toplama; veri temizleme ve ön işleme.",
       "XGBoost ile risk sınıflandırması ve tehlikeli sınıf için %85 recall.",
@@ -131,13 +131,14 @@ export const portfolioEntries: DetailEntry[] = [
       { value: "100 üzerinden skor", text: "Literatür tabanlı Ebeveyn Denetim Skoru." },
     ],
     tags: ["Selenium", "BeautifulSoup", "XGBoost", "K-Means", "Random Forest"],
-    href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
-    hrefLabel: "Projeyi GitHub’da aç",
+    githubUrl: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
+    assetType: "none",
+    featured: true,
   },
   {
     title: "Beko Segmentasyon Analizi",
-    meta: "Ürün analizi · Segmentasyon · Dashboard",
-    description: "Beko web sitesinden alınan dinamik ürün verileriyle fiyat/performans temelli segmentasyon analizi.",
+    shortDescription: "Dinamik ürün verileriyle fiyat/performans segmentasyonu ve Streamlit dashboard çalışması.",
+    detailDescription: "Beko web sitesinden alınan dinamik ürün verileriyle fiyat/performans temelli segmentasyon analizi.",
     bullets: [
       "Selenium ile veri toplama; özellik mühendisliği ve ölçeklendirme.",
       "Ürün özelliklerine dayalı ürün skoru oluşturma.",
@@ -147,13 +148,13 @@ export const portfolioEntries: DetailEntry[] = [
       { value: "6 stratejik segment", text: "K-Means ile oluşturulan fiyat/performans grupları." },
     ],
     tags: ["Selenium", "K-Means", "Streamlit", "Özellik Mühendisliği"],
-    href: "https://github.com/betultgumus/ybst-veri-bilimi",
-    hrefLabel: "Projeyi GitHub’da aç",
+    githubUrl: "https://github.com/betultgumus/ybst-veri-bilimi",
+    assetType: "none",
   },
   {
     title: "Türkiye Dijital Oyun Pazarında Fiyat Analizi",
-    meta: "Fiyat tahmini · Regresyon · Keşifçi veri analizi",
-    description: "Oyun sitelerinden toplanan verilerle oyun fiyatlarını tahmin eden ve regresyon modellerini karşılaştıran analiz.",
+    shortDescription: "Web Scraping ile toplanan oyun verilerinde EDA, özellik mühendisliği ve regresyon modeli karşılaştırması.",
+    detailDescription: "Oyun sitelerinden toplanan verilerle oyun fiyatlarını tahmin eden ve regresyon modellerini karşılaştıran analiz.",
     bullets: [
       "Selenium ve BeautifulSoup ile veri toplama ve temizleme.",
       "Özellik mühendisliği ve keşifçi veri analizi.",
@@ -163,8 +164,8 @@ export const portfolioEntries: DetailEntry[] = [
       { value: "MAE, RMSE ve R²", text: "Regresyon modellerinin karşılaştırıldığı değerlendirme metrikleri." },
     ],
     tags: ["Selenium", "BeautifulSoup", "Regresyon", "EDA"],
-    href: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/regression-price-model",
-    hrefLabel: "Projeyi GitHub’da aç",
+    githubUrl: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/regression-price-model",
+    assetType: "none",
   },
 ];
 

@@ -1,47 +1,84 @@
 import { AnimatePresence, motion, type PanInfo } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { IconArrowLeft, IconArrowRight, IconExternalLink, IconX } from "@tabler/icons-react";
-import type { DetailEntry } from "@/types/content";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconBrandGithub,
+  IconExternalLink,
+  IconFileTypePdf,
+  IconPhoto,
+  IconX,
+} from "@tabler/icons-react";
+import type { ProjectEntry } from "@/types/content";
 
-type Props = { projects: DetailEntry[] };
+type Props = { projects: ProjectEntry[] };
 
-function ProjectVisual({ project, index, compact = false }: { project: DetailEntry; index: number; compact?: boolean }) {
-  return (
-    <div className={`project-visual project-visual-${index + 1} ${compact ? "compact" : ""}`} data-project={project.title} aria-hidden="true">
-      <span>{index === 0 ? "ANIVIA" : index === 1 ? "BEKO" : "TR · GAME"}</span>
-      <i />
-    </div>
-  );
-}
-
-function ProjectHighlights({ highlights }: Pick<DetailEntry, "highlights">) {
+function ProjectHighlights({ highlights }: Pick<ProjectEntry, "highlights">) {
   if (!highlights?.length) return null;
   return (
     <ul className="project-highlights">
-      {highlights.map((highlight) => <li key={highlight.value}><strong>{highlight.value}</strong><span>{highlight.text}</span></li>)}
+      {highlights.map((highlight) => (
+        <li key={highlight.value}>
+          <strong>{highlight.value}</strong>
+          <span>{highlight.text}</span>
+        </li>
+      ))}
     </ul>
+  );
+}
+
+function ProjectAsset({ project }: { project: ProjectEntry }) {
+  if (project.assetType === "none" || !project.assetSrc) return null;
+
+  if (project.assetType === "image") {
+    return (
+      <figure className="project-asset project-asset-image">
+        <div className="project-asset-label"><IconPhoto size={16} aria-hidden="true" /> Proje görseli</div>
+        <img src={project.assetSrc} alt={project.assetAlt ?? `${project.title} proje görseli`} loading="lazy" />
+      </figure>
+    );
+  }
+
+  return (
+    <figure className="project-asset project-asset-pdf">
+      <div className="project-asset-label"><IconFileTypePdf size={16} aria-hidden="true" /> PDF önizleme</div>
+      <object
+        data={`${project.assetSrc}#view=FitH&toolbar=0&navpanes=0`}
+        type="application/pdf"
+        aria-label={project.assetAlt ?? `${project.title} PDF önizlemesi`}
+      >
+        <p>Tarayıcınız gömülü PDF önizlemesini desteklemiyor.</p>
+      </object>
+      <a href={project.assetSrc} target="_blank" rel="noreferrer">
+        Tam belgeyi aç <IconExternalLink size={15} aria-hidden="true" />
+      </a>
+    </figure>
   );
 }
 
 export function ExpandableProjects({ projects }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const detailButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeProject = activeIndex === null ? null : projects[activeIndex];
 
   const close = () => {
     const previousIndex = activeIndex;
     setActiveIndex(null);
-    window.setTimeout(() => previousIndex !== null && cardRefs.current[previousIndex]?.focus(), 0);
+    window.setTimeout(() => previousIndex !== null && detailButtonRefs.current[previousIndex]?.focus(), 0);
   };
   const previous = () => setActiveIndex((current) => current === null ? 0 : (current - 1 + projects.length) % projects.length);
   const next = () => setActiveIndex((current) => current === null ? 0 : (current + 1) % projects.length);
 
   useEffect(() => {
     if (activeIndex === null) return;
-    const previousOverflow = document.body.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.classList.add("project-modal-open");
     closeButtonRef.current?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
       if (event.key === "ArrowLeft") previous();
@@ -49,7 +86,9 @@ export function ExpandableProjects({ projects }: Props) {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.classList.remove("project-modal-open");
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [activeIndex]);
@@ -61,62 +100,104 @@ export function ExpandableProjects({ projects }: Props) {
 
   return (
     <div className="projects-experience">
-      <div className="expandable-project-grid">
+      <div className="compact-project-grid">
         {projects.map((project, index) => (
-          <motion.button
-            type="button"
-            className={`expandable-project-card ${index === 0 ? "featured" : ""}`}
+          <motion.article
+            className={`compact-project-card ${project.featured ? "featured" : ""}`}
             key={project.title}
-            ref={(element) => { cardRefs.current[index] = element; }}
-            onClick={() => setActiveIndex(index)}
             whileHover={{ y: -3 }}
             transition={{ duration: .2 }}
-            aria-label={`${project.title} projesinin detaylarını aç`}
           >
-            <ProjectVisual project={project} index={index} compact />
-            <span className="project-card-copy">
-              <strong>{project.title}</strong>
-              <span>{project.description}</span>
-              <span className="project-keywords">{project.tags?.map((tag) => <i key={tag}>{tag}</i>)}</span>
-            </span>
-            <span className="project-open-label">Detayları aç <IconArrowRight size={16} aria-hidden="true" /></span>
-          </motion.button>
+            <header className="compact-project-header">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {project.featured ? <small>Öne çıkan proje</small> : project.date ? <time>{project.date}</time> : null}
+            </header>
+            <h3>{project.title}</h3>
+            <p>{project.shortDescription}</p>
+            <div className="project-keywords" aria-label={`${project.title} teknolojileri`}>
+              {project.tags.slice(0, 6).map((tag) => <span key={tag}>{tag}</span>)}
+            </div>
+            <div className="compact-project-actions">
+              <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                <IconBrandGithub size={17} aria-hidden="true" /> GitHub’da incele
+              </a>
+              <button
+                ref={(element) => { detailButtonRefs.current[index] = element; }}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`${project.title} projesinin detaylarını aç`}
+              >
+                Detayları aç <IconArrowRight size={16} aria-hidden="true" />
+              </button>
+            </div>
+          </motion.article>
         ))}
       </div>
 
       <AnimatePresence>
         {activeProject && activeIndex !== null ? (
-          <motion.div className="project-modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}>
-            <motion.div
-              className="project-modal"
+          <motion.div
+            className="project-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}
+          >
+            <button className="project-side-navigation previous" type="button" onClick={previous} aria-label="Önceki projeye geç">
+              <IconArrowLeft size={24} aria-hidden="true" />
+            </button>
+
+            <motion.section
+              className={`project-modal ${activeProject.assetType !== "none" && activeProject.assetSrc ? "has-asset" : "no-asset"}`}
               role="dialog"
               aria-modal="true"
               aria-labelledby="project-dialog-title"
               key={activeProject.title}
-              initial={{ opacity: 0, y: 24, scale: .98 }}
+              initial={{ opacity: 0, y: 22, scale: .985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: .985 }}
-              transition={{ duration: .28, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: 14, scale: .99 }}
+              transition={{ duration: .26, ease: [0.22, 1, 0.36, 1] }}
             >
-              <button ref={closeButtonRef} type="button" className="project-modal-close" onClick={close} aria-label="Proje detayını kapat"><IconX size={20} /></button>
-              <motion.div className="project-modal-scroll" drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={.08} onDragEnd={onDragEnd}>
-                <ProjectVisual project={activeProject} index={activeIndex} />
+              <button ref={closeButtonRef} type="button" className="project-modal-close" onClick={close} aria-label="Proje detayını kapat">
+                <IconX size={20} aria-hidden="true" />
+              </button>
+              <motion.div
+                className="project-modal-scroll"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={.06}
+                onDragEnd={onDragEnd}
+              >
+                <ProjectAsset project={activeProject} />
                 <div className="project-modal-copy">
-                  <span className="project-modal-count">{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+                  <div className="project-modal-meta">
+                    <span>{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+                    {activeProject.date ? <time>{activeProject.date}</time> : null}
+                  </div>
                   <h3 id="project-dialog-title">{activeProject.title}</h3>
-                  <p>{activeProject.description}</p>
-                  {activeProject.bullets ? <ul className="project-details">{activeProject.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
+                  <p>{activeProject.detailDescription}</p>
+                  {activeProject.bullets?.length ? (
+                    <ul className="project-details">{activeProject.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                  ) : null}
                   <ProjectHighlights highlights={activeProject.highlights} />
-                  <div className="project-modal-tags">{activeProject.tags?.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                  {activeProject.href ? <a className="project-github-link" href={activeProject.href} target="_blank" rel="noreferrer">GitHub’da incele <IconExternalLink size={16} aria-hidden="true" /></a> : null}
+                  {activeProject.notes || activeProject.extraText ? (
+                    <p className="project-extra-text">{activeProject.notes ?? activeProject.extraText}</p>
+                  ) : null}
+                  <div className="project-modal-tags">{activeProject.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                  <a className="project-github-link" href={activeProject.githubUrl} target="_blank" rel="noreferrer">
+                    <IconBrandGithub size={17} aria-hidden="true" /> GitHub’da incele <IconExternalLink size={15} aria-hidden="true" />
+                  </a>
                 </div>
               </motion.div>
-              <div className="project-modal-navigation" aria-label="Projeler arasında gezin">
-                <button type="button" onClick={previous} aria-label="Önceki proje"><IconArrowLeft size={18} /><span>Önceki</span></button>
-                <span>Kaydır veya ok tuşlarını kullan</span>
-                <button type="button" onClick={next} aria-label="Sonraki proje"><span>Sonraki</span><IconArrowRight size={18} /></button>
+              <div className="project-modal-mobile-navigation" aria-label="Projeler arasında gezin">
+                <button type="button" onClick={previous}><IconArrowLeft size={18} aria-hidden="true" /> Önceki</button>
+                <button type="button" onClick={next}>Sonraki <IconArrowRight size={18} aria-hidden="true" /></button>
               </div>
-            </motion.div>
+            </motion.section>
+
+            <button className="project-side-navigation next" type="button" onClick={next} aria-label="Sonraki projeye geç">
+              <IconArrowRight size={24} aria-hidden="true" />
+            </button>
           </motion.div>
         ) : null}
       </AnimatePresence>
