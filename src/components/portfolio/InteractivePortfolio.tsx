@@ -120,7 +120,7 @@ function EducationContent() {
   return (
     <div className="education-content">
       <div className="education-list" aria-label="Eğitim kayıtları">
-        {educationEntries.map((entry) => (
+        {educationEntries.map((entry, index) => (
           <article className="education-item" key={entry.title}>
             <header className="education-item-header">
               <div>
@@ -130,12 +130,13 @@ function EducationContent() {
               <time>{entry.meta}</time>
             </header>
             <p>{entry.description}</p>
+            {index === 0 && entry.tags?.length ? <div className="education-tag-label">İlgili Dersler</div> : null}
             <TagList tags={entry.tags} />
           </article>
         ))}
       </div>
       <div className="certificate-area">
-        <div className="subsection-heading"><span>Güncel kayıtlar</span><h3>Sertifika & Eğitimler</h3></div>
+        <div className="subsection-heading"><h3>Sertifikalar</h3></div>
         <div className="certificate-grid">
           {certificationEntries.map((entry) => (
             <article className="certificate-card" key={entry.title}>

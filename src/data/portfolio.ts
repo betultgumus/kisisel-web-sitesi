@@ -173,7 +173,7 @@ export const sections: Section[] = [
   { id: "skills", title: "Teknik Yetkinlikler", shortTitle: "Teknik Yetkinlikler", wheelTitle: "Yetkinlikler" },
   { id: "experience", title: "Deneyim" },
   { id: "portfolio", title: "Projeler" },
-  { id: "education", title: "Eğitim & Sertifikalar", shortTitle: "Eğitim", wheelTitle: "Eğitim" },
+  { id: "education", title: "Eğitim", shortTitle: "Eğitim", wheelTitle: "Eğitim" },
   { id: "contact", title: "İletişim" },
 ];
 
