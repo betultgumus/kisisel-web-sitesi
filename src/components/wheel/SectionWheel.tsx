@@ -48,7 +48,7 @@ export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
             data-section={section.id}
           >
             <span className="wheel-dot" />
-            <span className="wheel-label">{section.shortTitle ?? section.title}</span>
+            <span className="wheel-label">{section.wheelTitle ?? section.title}</span>
           </motion.button>
         );
       })}

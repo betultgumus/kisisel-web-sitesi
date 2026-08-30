@@ -3,25 +3,27 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconExternalLink,
-  IconFileText,
   IconMail,
   IconMapPin,
-  IconPhone,
 } from "@tabler/icons-react";
+import type { CSSProperties } from "react";
 import { FloatingDock } from "@/components/dock/FloatingDock";
+import { ExpandableProjects } from "@/components/projects/ExpandableProjects";
 import { TechnologyStrip } from "@/components/technology/TechnologyStrip";
 import { SectionWheel } from "@/components/wheel/SectionWheel";
 import { contactLinks } from "@/data/contact";
 import { certificationEntries, educationEntries, experienceEntries, portfolioEntries } from "@/data/details";
-import { profile, technicalSkills } from "@/data/portfolio";
+import { profile, technicalSkills, technologies } from "@/data/portfolio";
 import { sections } from "@/data/sections";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import type { DetailEntry, Section } from "@/types/content";
+import type { Section } from "@/types/content";
 
 type Props = {
   activeIndex: number;
   onSelect: (index: number) => void;
 };
+
+const technologyByName = new Map(technologies.map((technology) => [technology.name, technology]));
 
 function TagList({ tags }: { tags?: string[] }) {
   if (!tags?.length) return null;
@@ -31,9 +33,7 @@ function TagList({ tags }: { tags?: string[] }) {
 function SectionHeader({ section }: { section: Section }) {
   return (
     <header className="section-heading">
-      <div className="section-topline"><span>{section.eyebrow}</span><span>{section.metric}</span></div>
       <h2 id={`${section.id}-title`}>{section.title}</h2>
-      <p className="section-lead">{section.description}</p>
     </header>
   );
 }
@@ -49,9 +49,6 @@ function AboutContent() {
     <div className="about-editorial">
       <div className="about-narrative">
         {profile.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        <a className="cv-link" href={profile.cvPath} target="_blank" rel="noreferrer" aria-label="Betül Tuba Gümüş güncel CV'sini görüntüle">
-          <IconFileText size={17} aria-hidden="true" /> CV'yi Gör <IconExternalLink size={14} aria-hidden="true" />
-        </a>
       </div>
       <div className="profile-facts" aria-label="Profil özeti">
         {facts.map((fact) => (
@@ -71,9 +68,18 @@ function SkillsContent() {
       <div className="skills-section-grid" aria-label="Teknik yetkinlik kategorileri">
         {technicalSkills.map((group, index) => (
           <article className={`skill-category skill-category-${index + 1}`} key={group.category}>
-            <span className="skill-category-index">{String(index + 1).padStart(2, "0")}</span>
             <h3>{group.category}</h3>
-            <div className="skill-chip-list">{group.items.map((skill) => <span key={skill}>{skill}</span>)}</div>
+            <div className="skill-chip-list">
+              {group.items.map((skill) => {
+                const technology = technologyByName.get(skill);
+                const Icon = technology?.icon;
+                return (
+                  <span className={Icon ? "skill-chip-with-logo" : ""} style={technology ? { "--skill-color": technology.color } as CSSProperties : undefined} key={skill}>
+                    {Icon ? <Icon aria-hidden="true" /> : null}<span>{skill}</span>
+                  </span>
+                );
+              })}
+            </div>
           </article>
         ))}
       </div>
@@ -85,14 +91,14 @@ function SkillsContent() {
 function ExperienceTimeline() {
   return (
     <div className="experience-timeline">
-      {experienceEntries.map((entry, index) => (
+      {experienceEntries.map((entry) => (
         <article className="timeline-item" key={entry.title}>
           <span className="timeline-marker" aria-hidden="true"><i /></span>
           <div className="timeline-card">
             <header className="timeline-card-header">
               <div>
-                <span className="timeline-role">{entry.role}</span>
-                <h3>{entry.title}</h3>
+                <h3>{entry.role}</h3>
+                <span className="timeline-company">{entry.title}</span>
               </div>
               <time>{entry.period}</time>
             </header>
@@ -100,55 +106,27 @@ function ExperienceTimeline() {
             <p>{entry.description}</p>
             {entry.bullets ? <ul className="entry-bullets">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
             <TagList tags={entry.tags} />
-            <span className="timeline-count" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </div>
         </article>
       ))}
     </div>
-  );
-}
-
-function ProjectHighlights({ highlights }: Pick<DetailEntry, "highlights">) {
-  if (!highlights?.length) return null;
-  return (
-    <ul className="project-highlights">
-      {highlights.map((highlight) => (
-        <li key={highlight.value}><strong>{highlight.value}</strong><span>{highlight.text}</span></li>
-      ))}
-    </ul>
   );
 }
 
 function ProjectShowcase() {
-  return (
-    <div className="project-showcase">
-      {portfolioEntries.map((entry, index) => (
-        <article className={`project-card ${index === 0 ? "featured" : ""}`} key={entry.title}>
-          <div className="project-card-topline"><span>{String(index + 1).padStart(2, "0")}</span><small>{entry.meta}</small></div>
-          <h3>{entry.title}</h3>
-          <p>{entry.description}</p>
-          {entry.bullets ? <ul className="project-details">{entry.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
-          <ProjectHighlights highlights={entry.highlights} />
-          <div className="project-card-footer">
-            <TagList tags={entry.tags} />
-            {entry.href ? <a className="entry-link" href={entry.href} target="_blank" rel="noreferrer">GitHub <IconExternalLink size={15} aria-hidden="true" /></a> : null}
-          </div>
-        </article>
-      ))}
-    </div>
-  );
+  return <ExpandableProjects projects={portfolioEntries} />;
 }
 
 function EducationContent() {
   return (
     <div className="education-content">
       <div className="education-list" aria-label="Eğitim kayıtları">
-        {educationEntries.map((entry, index) => (
+        {educationEntries.map((entry) => (
           <article className="education-item" key={entry.title}>
-            <span className="education-index">{String(index + 1).padStart(2, "0")}</span>
             <div>
               <small>{entry.meta}</small>
-              <h3>{entry.title}</h3>
+              <h3>{entry.role}</h3>
+              <strong className="education-organization">{entry.title}</strong>
               <p>{entry.description}</p>
               <TagList tags={entry.tags} />
             </div>
@@ -158,12 +136,12 @@ function EducationContent() {
       <div className="certificate-area">
         <div className="subsection-heading"><span>Güncel kayıtlar</span><h3>Sertifika & Eğitimler</h3></div>
         <div className="certificate-grid">
-          {certificationEntries.map((entry, index) => (
+          {certificationEntries.map((entry) => (
             <article className="certificate-card" key={entry.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
               <small>{entry.meta}</small>
               <h4>{entry.title}</h4>
-              {entry.href ? <a href={entry.href} target="_blank" rel="noreferrer" aria-label={`${entry.title} GitHub reposunu aç`}><IconExternalLink size={15} aria-hidden="true" /></a> : null}
+              <strong>{entry.source}</strong>
+              {entry.href ? <a href={entry.href} target="_blank" rel="noreferrer" aria-label={`${entry.title} GitHub reposunu aç`}>{entry.hrefLabel}<IconExternalLink size={15} aria-hidden="true" /></a> : null}
             </article>
           ))}
         </div>
@@ -183,11 +161,8 @@ function ContactContent() {
       </div>
       <div className="contact-link-grid" aria-label="Betül Tuba Gümüş iletişim bağlantıları">
         <a href={contactLinks.email}><IconMail aria-hidden="true" /><span><small>E-posta</small>{contactLinks.emailAddress}</span></a>
-        <a href={contactLinks.phone}><IconPhone aria-hidden="true" /><span><small>Telefon</small>{contactLinks.phoneDisplay}</span></a>
         <a href={contactLinks.linkedin} target="_blank" rel="noreferrer"><IconBrandLinkedin aria-hidden="true" /><span><small>LinkedIn</small>Bağlantı kur</span></a>
         <a href={contactLinks.github} target="_blank" rel="noreferrer"><IconBrandGithub aria-hidden="true" /><span><small>GitHub</small>Projeleri incele</span></a>
-        <div className="contact-static"><IconMapPin aria-hidden="true" /><span><small>Konum</small>{contactLinks.location}</span></div>
-        <a href={profile.cvPath} target="_blank" rel="noreferrer"><IconFileText aria-hidden="true" /><span><small>Özgeçmiş</small>CV'yi görüntüle</span></a>
       </div>
     </div>
   );

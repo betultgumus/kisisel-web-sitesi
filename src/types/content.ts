@@ -4,12 +4,9 @@ export type SectionId = "about" | "skills" | "experience" | "portfolio" | "educa
 
 export type Section = {
   id: SectionId;
-  eyebrow: string;
   title: string;
   shortTitle?: string;
-  description: string;
-  note: string;
-  metric: string;
+  wheelTitle?: string;
 };
 
 export type DetailEntry = {
@@ -17,8 +14,10 @@ export type DetailEntry = {
   meta: string;
   description: string;
   role?: string;
+  organization?: string;
   location?: string;
   period?: string;
+  source?: string;
   tags?: string[];
   bullets?: string[];
   highlights?: Array<{ value: string; text: string }>;

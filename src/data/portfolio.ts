@@ -4,12 +4,12 @@ import {
   SiNumpy,
   SiPandas,
   SiPlotly,
-  SiPostgresql,
   SiPython,
   SiScikitlearn,
   SiSelenium,
   SiStreamlit,
 } from "react-icons/si";
+import { PiMicrosoftExcelLogo } from "react-icons/pi";
 import type { DetailEntry, Section, Technology } from "@/types/content";
 
 export const profile = {
@@ -23,10 +23,8 @@ export const profile = {
   ],
   location: "Bursa, Türkiye",
   email: "betultgumus@gmail.com",
-  phone: "+90 538 544 78 98",
   linkedin: "https://linkedin.com/in/betultgumus",
   github: "https://github.com/betultgumus",
-  cvPath: "/betul-tuba-gumus-cv.pdf",
 } as const;
 
 export const technicalSkills = [
@@ -40,12 +38,14 @@ export const technicalSkills = [
 export const educationEntries: DetailEntry[] = [
   {
     title: "Bandırma Onyedi Eylül Üniversitesi",
-    meta: "Yönetim Bilişim Sistemleri (Lisans) · 10/2023 – 06/2027",
+    role: "Yönetim Bilişim Sistemleri (Lisans)",
+    meta: "10/2023 – 06/2027",
     description: "Beklenen mezuniyet: Haziran 2027. GANO: 3,27 / 4,00.",
     tags: ["Veri Tabanı Yönetim Sistemleri", "İstatistik", "Yazılım Mimarileri", "Veri Tabanı Programlama", "Veri Madenciliği", "Yapay Zekâ Uygulamaları", "Sağlıkta Yapay Zekâ", "Makine Öğrenmesi"],
   },
   {
-    title: "Google Yapay Zekâ ve Teknoloji Akademisi",
+    title: "Google",
+    role: "Yapay Zekâ ve Teknoloji Akademisi",
     meta: "01/2026 – 08/2026",
     description: "Girişimcilik, finans, hukuk, insan kaynakları, Google Proje Yönetimi, web uygulama geliştirme ve Derin Öğrenme eğitimleri; Ideathon, Hackathon ve Datathon etkinliklerinde aktif proje geliştirme.",
     tags: ["Ideathon", "Hackathon", "Datathon", "Proje Yönetimi", "Derin Öğrenme"],
@@ -53,10 +53,10 @@ export const educationEntries: DetailEntry[] = [
 ];
 
 export const certificationEntries: DetailEntry[] = [
-  { title: "Derin Öğrenme Eğitimi", meta: "Tamamlama Belgesi", description: "Derin öğrenme alanındaki eğitim programının tamamlama belgesi." },
-  { title: "Web Uygulamaları Geliştirme Eğitimi", meta: "Tamamlama Belgesi", description: "Web uygulaması geliştirme eğitim programının tamamlama belgesi." },
-  { title: "Google Proje Yönetimi", meta: "Sertifika", description: "Google Proje Yönetimi eğitimleri kapsamında alınan sertifika." },
-  { title: "Veri Bilimi ve Makine Öğrenmesi 2026", meta: "100 Günlük Kamp", description: "Uygulama ve proje odaklı 100 günlük veri bilimi ve makine öğrenmesi kampı.", href: "https://github.com/betultgumus/100DaysOfDataScience-ML-2026", hrefLabel: "GitHub reposunu aç" },
+  { title: "Derin Öğrenme Eğitimi", meta: "Tamamlama Belgesi", source: "Google Yapay Zekâ ve Teknoloji Akademisi", description: "Derin öğrenme alanındaki eğitim programının tamamlama belgesi." },
+  { title: "Web Uygulamaları Geliştirme Eğitimi", meta: "Tamamlama Belgesi", source: "Google Yapay Zekâ ve Teknoloji Akademisi", description: "Web uygulaması geliştirme eğitim programının tamamlama belgesi." },
+  { title: "Google Proje Yönetimi", meta: "Sertifika", source: "Coursera", description: "Google Proje Yönetimi eğitimleri kapsamında alınan sertifika." },
+  { title: "Veri Bilimi ve Makine Öğrenmesi 2026", meta: "100 Günlük Kamp", source: "Atıl Samancıoğlu", description: "Uygulama ve proje odaklı 100 günlük veri bilimi ve makine öğrenmesi kampı.", href: "https://github.com/betultgumus/100DaysOfDataScience-ML-2026", hrefLabel: "GitHub Reposu" },
 ];
 
 export const experienceEntries: DetailEntry[] = [
@@ -169,23 +169,19 @@ export const portfolioEntries: DetailEntry[] = [
 ];
 
 export const sections: Section[] = [
-  { id: "about", eyebrow: "02 / Profil", title: "Hakkımda", description: "Veri analizi ve yapay zekâ odağımı, kullandığım yöntemleri ve çalışma yaklaşımımı keşfedin.", note: profile.about[0], metric: "Python · SQL · AI" },
-  { id: "skills", eyebrow: "03 / Teknik Yetkinlikler", title: "Teknik Yetkinlikler", shortTitle: "Teknik Yetkinlikler", description: "Veri toplama ve analizden makine öğrenmesi ile görüntü işlemeye uzanan güncel teknik araç setim.", note: "", metric: "5 Yetkinlik Alanı" },
-  { id: "experience", eyebrow: "04 / Uygulama", title: "Deneyim", description: "Web geliştirme, makine öğrenmesi ve veri bilimi ekip liderliği deneyimlerim.", note: "", metric: "4 Güncel Deneyim" },
-  { id: "portfolio", eyebrow: "05 / Seçilmiş İşler", title: "Projeler", description: "Gerçek veri, ölçülebilir sonuçlar ve karar destek yaklaşımıyla geliştirdiğim projeler.", note: "", metric: "3 Seçili Proje" },
-  { id: "education", eyebrow: "06 / Öğrenme Yolculuğu", title: "Eğitim & Sertifikalar", shortTitle: "Eğitim", description: "Akademik yolculuğum, seçili derslerim ve güncel eğitim kayıtlarım.", note: "", metric: "GANO 3,27 / 4,00" },
-  { id: "contact", eyebrow: "07 / Birlikte Üretelim", title: "İletişim", description: "Veri analizi, yapay zekâ projeleri veya yeni bir iş birliği için iletişime geçebilirsiniz.", note: "", metric: profile.location },
+  { id: "about", title: "Hakkımda" },
+  { id: "skills", title: "Teknik Yetkinlikler", shortTitle: "Teknik Yetkinlikler", wheelTitle: "Yetkinlikler" },
+  { id: "experience", title: "Deneyim" },
+  { id: "portfolio", title: "Projeler" },
+  { id: "education", title: "Eğitim & Sertifikalar", shortTitle: "Eğitim", wheelTitle: "Eğitim" },
+  { id: "contact", title: "İletişim" },
 ];
 
 export const contactLinks = {
   email: `mailto:${profile.email}`,
   emailAddress: profile.email,
-  phone: "tel:+905385447898",
-  phoneDisplay: profile.phone,
-  location: profile.location,
   github: profile.github,
   linkedin: profile.linkedin,
-  contact: "#contact",
 } as const;
 
 export const technologies: Technology[] = [
@@ -193,7 +189,7 @@ export const technologies: Technology[] = [
   { name: "Pandas", icon: SiPandas, color: "#150458" },
   { name: "NumPy", icon: SiNumpy, color: "#4D77CF" },
   { name: "Scikit-learn", icon: SiScikitlearn, color: "#F7931E" },
-  { name: "SQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "Excel", icon: PiMicrosoftExcelLogo, color: "#217346" },
   { name: "Git", icon: SiGit, color: "#F05032" },
   { name: "GitHub", icon: SiGithub, color: "#586069" },
   { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
