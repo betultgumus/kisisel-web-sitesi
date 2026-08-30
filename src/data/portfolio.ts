@@ -1,15 +1,12 @@
 import {
-  SiGit,
+  SiClaude,
+  SiGooglegemini,
   SiGithub,
-  SiNumpy,
-  SiPandas,
-  SiPlotly,
   SiPython,
-  SiScikitlearn,
-  SiSelenium,
-  SiStreamlit,
 } from "react-icons/si";
 import { PiMicrosoftExcelLogo } from "react-icons/pi";
+import { VscOpenai, VscVscode } from "react-icons/vsc";
+import { PowerBiIcon } from "@/components/technology/ToolBrandIcons";
 import type { DetailEntry, ProjectEntry, Section, Technology } from "@/types/content";
 
 export const profile = {
@@ -18,8 +15,8 @@ export const profile = {
   focus: "Veri Bilimi • Makine Öğrenmesi • Yapay Zekâ",
   heroSummary: "Python ve SQL ile veri analizi ve yapay zekâ projeleri geliştiren Yönetim Bilişim Sistemleri öğrencisi.",
   about: [
-    "Yönetim Bilişim Sistemleri öğrencisi olarak Python ve SQL ile gerçek veri setleri üzerinde veri analizi, tahminleme ve makine öğrenmesi projeleri geliştiriyorum.",
-    "Data Analytics / AI odağında; karar destek sistemleri ve yapay zekâ çalışmalarında veriyi anlaşılır, ölçülebilir ve uygulanabilir çözümlere dönüştürmeye odaklanıyorum.",
+    "Yönetim Bilişim Sistemleri öğrencisiyim. Python ve SQL kullanarak gerçek veri setleri üzerinde veri analizi, tahminleme, makine öğrenmesi ve yapay zekâ projeleri geliştiriyorum.",
+    "Data Analytics / AI odağında karar destek sistemleri ve veri odaklı çözümler üzerinde çalışıyorum. Analiz sonuçlarını ölçülebilir ve uygulanabilir çıktılara dönüştürmeye odaklanıyorum.",
   ],
   location: "Bursa, Türkiye",
   email: "betultgumus@gmail.com",
@@ -66,11 +63,11 @@ export const experienceEntries: DetailEntry[] = [
     role: "AI Destekli Web Geliştirici",
     location: "Uzaktan, Serbest",
     period: "06/2026 – Devam Ediyor",
-    description: "AI destekli geliştirme araçlarıyla müşteri gereksinimlerine uygun, kullanıcı odaklı dijital çözümler geliştiriyorum.",
+    description: "Müşteri gereksinimlerine uygun web arayüzleri ve kullanıcı odaklı dijital çözümler geliştiriyorum.",
     bullets: [
-      "Web arayüzleri ve kullanıcı odaklı dijital çözümler geliştirme.",
-      "Meta başlık/açıklama, içerik yapısı, mobil uyumluluk ve performans optimizasyonunu kapsayan teknik ve sayfa içi SEO.",
-      "Test, hata giderme ve production deployment süreçlerini yürütme.",
+      "AI destekli geliştirme araçlarıyla müşteri gereksinimlerine uygun web arayüzleri geliştirme.",
+      "Teknik ve sayfa içi SEO kapsamında meta başlık/açıklama, içerik yapısı, mobil uyumluluk ve performans optimizasyonu.",
+      "Web projelerinde test, hata giderme ve production deployment süreçlerini yürütme.",
     ],
     tags: ["AI Destekli Geliştirme", "SEO", "Responsive UI", "Deployment"],
   },
@@ -80,12 +77,11 @@ export const experienceEntries: DetailEntry[] = [
     role: "Makine Öğrenmesi Stajyeri",
     location: "Uzaktan",
     period: "06/2025 – 08/2026",
-    description: "Görüntü iyileştirme modellerinin geliştirme, eğitim ve değerlendirme süreçlerinde görev aldım.",
+    description: "U-Net, Pix2Pix, ESRGAN ve Restormer tabanlı görüntü iyileştirme modellerinin geliştirme ve eğitim süreçlerinde görev aldım.",
     bullets: [
-      "U-Net, Pix2Pix, ESRGAN ve Restormer tabanlı model geliştirme ve eğitimi.",
-      "Görüntü ön işleme, model eğitimi, inference ve performans değerlendirme.",
-      "PSNR, SSIM ve loss metrikleriyle model karşılaştırması.",
-      "Uzak sunucuda eğitim ve test; Git/GitHub ile versiyon kontrolü.",
+      "Görüntü ön işleme, model eğitimi, inference ve performans değerlendirme süreçlerini yürütme.",
+      "Model performanslarını PSNR, SSIM ve loss metrikleriyle değerlendirme ve karşılaştırma.",
+      "Uzak sunucu ortamında eğitim, test ve geliştirme; Git/GitHub ile versiyon kontrolü.",
     ],
     tags: ["U-Net", "Pix2Pix", "ESRGAN", "Restormer", "PSNR", "SSIM", "Git", "GitHub"],
   },
@@ -95,11 +91,10 @@ export const experienceEntries: DetailEntry[] = [
     role: "Veri Bilimi Ekip Lideri",
     location: "Bandırma",
     period: "12/2025 – 06/2026",
-    description: "Veri bilimi ekibinin iş akışını, görev dağılımını ve proje takvimini yönettim.",
+    description: "Veri bilimi ekibinin iş akışını, haftalık görev dağılımını ve proje takvimini yönettim.",
     bullets: [
-      "Veri temizleme, EDA ve modelleme süreçlerini koordine ederek kod incelemeleri yapma.",
-      "Haftalık görev dağılımı ve proje takvimi yönetimi.",
-      "2026 MII etkinliğinde veri bilimi projelerinin ekip koordinasyonu.",
+      "Veri temizleme, EDA ve modelleme süreçlerini koordine ederek kod incelemeleri gerçekleştirme.",
+      "2026 MII etkinliğinde veri bilimi projelerinin ekip koordinasyonunu sağlama.",
     ],
     tags: ["Ekip Liderliği", "EDA", "Modelleme", "Kod İnceleme"],
   },
@@ -109,7 +104,8 @@ export const experienceEntries: DetailEntry[] = [
     role: "Bilgi Teknolojileri Stajyeri",
     location: "Uzaktan",
     period: "10/2025 – 11/2025",
-    description: "Excel, Python ve Photoshop kullanarak projeler geliştirdim; Excel ile dashboard tasarladım.",
+    description: "Excel, Python ve Photoshop kullanarak proje çalışmaları geliştirdim.",
+    bullets: ["Excel ile dashboard tasarlama."],
     tags: ["Excel", "Python", "Photoshop", "Excel Dashboard"],
   },
 ];
@@ -185,14 +181,12 @@ export const contactLinks = {
 } as const;
 
 export const technologies: Technology[] = [
+  { name: "VS Code", icon: VscVscode, color: "#007ACC" },
+  { name: "ChatGPT", icon: VscOpenai, color: "#10A37F" },
+  { name: "Gemini", icon: SiGooglegemini, color: "#8E75B2" },
+  { name: "Claude", icon: SiClaude, color: "#D97757" },
+  { name: "Power BI", icon: PowerBiIcon, color: "#F2C811" },
   { name: "Python", icon: SiPython, color: "#3776AB" },
-  { name: "Pandas", icon: SiPandas, color: "#150458" },
-  { name: "NumPy", icon: SiNumpy, color: "#4D77CF" },
-  { name: "Scikit-learn", icon: SiScikitlearn, color: "#F7931E" },
   { name: "Excel", icon: PiMicrosoftExcelLogo, color: "#217346" },
-  { name: "Git", icon: SiGit, color: "#F05032" },
   { name: "GitHub", icon: SiGithub, color: "#586069" },
-  { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
-  { name: "Streamlit", icon: SiStreamlit, color: "#FF4B4B" },
-  { name: "Plotly", icon: SiPlotly, color: "#3F4F75" },
 ];
