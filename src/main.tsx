@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { MouseProvider } from "./providers/MouseProvider";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import "./styles/globals.css";
 
@@ -18,9 +17,7 @@ window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <MouseProvider>
-        <App />
-      </MouseProvider>
+      <App />
     </ThemeProvider>
   </StrictMode>,
 );

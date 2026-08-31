@@ -1,21 +1,14 @@
 import { ContactShadows } from "@react-three/drei";
-import { useMemo } from "react";
 import { CharacterLighting } from "./CharacterLighting";
-import { CharacterLookController } from "./CharacterLookController";
-import { CharacterModel, type HeadTrackingUniforms } from "./CharacterModel";
+import { CharacterModel } from "./CharacterModel";
 
 type Props = {
   theme: "light" | "dark";
   mobile: boolean;
   targetHeight: number;
-  trackingEnabled: boolean;
 };
 
-export function CharacterScene({ theme, mobile, targetHeight, trackingEnabled }: Props) {
-  const headTracking = useMemo<HeadTrackingUniforms>(() => ({
-    yaw: { value: 0 },
-    pitch: { value: 0 },
-  }), []);
+export function CharacterScene({ theme, mobile, targetHeight }: Props) {
   const groundY = -targetHeight / 2;
   const shadowScale = mobile ? 2.45 : 3.55;
   const shadowOpacity = theme === "dark" ? (mobile ? 0.48 : 0.4) : mobile ? 0.32 : 0.25;
@@ -24,9 +17,8 @@ export function CharacterScene({ theme, mobile, targetHeight, trackingEnabled }:
     <>
       <CharacterLighting theme={theme} />
       <group>
-        <CharacterModel targetHeight={targetHeight} headTracking={headTracking} />
+        <CharacterModel targetHeight={targetHeight} />
       </group>
-      <CharacterLookController headTracking={headTracking} enabled={trackingEnabled} />
       <ContactShadows
         position={[0, groundY + 0.015, 0]}
         scale={shadowScale}
