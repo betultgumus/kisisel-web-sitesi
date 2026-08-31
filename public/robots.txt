@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://betulgumus.vercel.app/sitemap.xml

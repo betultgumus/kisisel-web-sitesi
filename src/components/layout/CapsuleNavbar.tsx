@@ -34,7 +34,9 @@ export function CapsuleNavbar({ activeIndex, onSelect }: Props) {
           <button
             ref={(element) => { itemRefs.current[index] = element; }}
             key={section.id}
+            type="button"
             className={index === activeIndex ? "active" : ""}
+            aria-current={index === activeIndex ? "location" : undefined}
             onClick={() => onSelect(index)}
           >
             {index === activeIndex && <motion.span className="nav-pill" layoutId="active-nav" transition={{ type: "spring", stiffness: 380, damping: 36 }} />}

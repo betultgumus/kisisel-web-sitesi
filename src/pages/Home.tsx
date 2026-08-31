@@ -10,7 +10,21 @@ const CharacterStage = lazy(() => import("@/components/character/CharacterStage"
 
 export function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadCharacter, setLoadCharacter] = useState(false);
   const activeIndexRef = useRef(0);
+
+  useEffect(() => {
+    const idleWindow = window as Window & typeof globalThis & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    if (idleWindow.requestIdleCallback) {
+      const handle = idleWindow.requestIdleCallback(() => setLoadCharacter(true), { timeout: 350 });
+      return () => idleWindow.cancelIdleCallback?.(handle);
+    }
+    const timeout = window.setTimeout(() => setLoadCharacter(true), 80);
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   const selectSection = useCallback((next: number) => {
     const section = sections[next];
@@ -64,9 +78,11 @@ export function Home() {
     <div className="home-page">
       <AnimatedBackground variant={DEFAULT_BACKGROUND_VARIANT} />
       <CapsuleNavbar activeIndex={activeIndex} onSelect={selectSection} />
-      <Suspense fallback={<div className="scene-character hero-character character-loading" aria-hidden="true" />}>
-        <CharacterStage />
-      </Suspense>
+      {loadCharacter ? (
+        <Suspense fallback={<div className="scene-character hero-character character-loading" aria-hidden="true" />}>
+          <CharacterStage />
+        </Suspense>
+      ) : <div className="scene-character hero-character character-loading" aria-hidden="true" />}
       <Hero />
       <InteractivePortfolio activeIndex={activeIndex} onSelect={selectSection} />
     </div>

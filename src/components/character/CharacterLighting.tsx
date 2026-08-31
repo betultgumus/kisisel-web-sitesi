@@ -1,5 +1,5 @@
-import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef } from "react";
 import { AmbientLight, Color, DirectionalLight, HemisphereLight, MathUtils, PointLight } from "three";
 
 const LIGHT_CHARACTER_LIGHTING = {
@@ -45,6 +45,16 @@ export function CharacterLighting({ theme = "light" }: { theme?: "light" | "dark
   }), [lighting]);
   const initialLighting = useRef(lighting).current;
   const initialColors = useRef(colors).current;
+  const invalidate = useThree((state) => state.invalidate);
+  const previousTheme = useRef(theme);
+  const transitionFrames = useRef(0);
+
+  useEffect(() => {
+    if (previousTheme.current === theme) return;
+    previousTheme.current = theme;
+    transitionFrames.current = 36;
+    invalidate();
+  }, [invalidate, theme]);
 
   useFrame((_, delta) => {
     const blend = 1 - Math.exp(-delta * 5);
@@ -65,6 +75,10 @@ export function CharacterLighting({ theme = "light" }: { theme?: "light" | "dark
     if (rim.current) {
       rim.current.intensity = MathUtils.damp(rim.current.intensity, lighting.rim, 5, delta);
       rim.current.color.lerp(colors.rim, blend);
+    }
+    if (transitionFrames.current > 0) {
+      transitionFrames.current -= 1;
+      if (transitionFrames.current > 0) invalidate();
     }
   });
 

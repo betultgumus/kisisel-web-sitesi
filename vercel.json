@@ -1,3 +1,11 @@
 {
+  "headers": [
+    {
+      "source": "/models/businesswoman-web-v1.glb",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

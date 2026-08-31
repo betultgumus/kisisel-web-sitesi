@@ -142,7 +142,7 @@ a { color: inherit; text-decoration: none; }
 .capsule-nav { position: fixed; z-index: 80; top: 22px; left: 50%; transform: translateX(-50%); width: min(910px, calc(100% - 64px)); height: 58px; padding: 7px 9px 7px 14px; display: grid; grid-template-columns: minmax(0, 1fr) 62px; align-items: center; gap: 12px; border: 1px solid var(--border-light); border-radius: 999px; background: color-mix(in srgb, var(--nav-surface) 94%, transparent); -webkit-backdrop-filter: blur(11px) saturate(1.12); backdrop-filter: blur(11px) saturate(1.12); box-shadow: 0 14px 42px rgba(45, 37, 44, .1), inset 0 1px rgba(255,255,255,.22); transition: background-color .4s ease, border-color .4s ease; }
 .nav-items { display: flex; justify-content: center; gap: 2px; }
 .nav-items button { position: relative; isolation: isolate; border: 0; background: transparent; padding: 10px 14px; border-radius: 999px; color: var(--text-secondary); white-space: nowrap; font-size: 12px; }
-.nav-items button::after, .theme-toggle::after, .compact-project-actions a::after, .compact-project-actions button::after, .dock-item::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: 44px; transform: translate(-50%, -50%); background: transparent; }
+.nav-items button::after, .theme-toggle::after, .compact-project-actions a::after, .compact-project-actions button::after, .project-modal-close::after, .project-modal-mobile-navigation button::after, .dock-item::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: 44px; transform: translate(-50%, -50%); background: transparent; }
 .nav-items button.active { color: var(--text-primary); }
 .nav-label-compact { display: none; }
 .nav-pill { position: absolute; inset: 0; z-index: -1; background: var(--nav-pill); border: 1px solid var(--border-light); border-radius: inherit; box-shadow: 0 4px 16px rgba(36,34,30,.08); }
@@ -362,7 +362,7 @@ a { color: inherit; text-decoration: none; }
   .portfolio-shell { min-height: 100svh; }
   .capsule-nav { top: 10px; width: calc(100% - 12px); height: 50px; grid-template-columns: minmax(0, 1fr) 52px; gap: 3px; padding: 5px 5px 5px 8px; }
   .nav-items { display: flex; justify-content: flex-start; gap: 1px; overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, black 8px, black calc(100% - 8px), transparent); mask-image: linear-gradient(90deg, transparent, black 8px, black calc(100% - 8px), transparent); }
-  .nav-items button { flex: none; min-width: auto; overflow: visible; padding: 8px 9px; font-size: 9px; text-overflow: initial; }
+  .nav-items button { flex: none; min-width: auto; overflow: visible; padding: 8px 9px; font-size: 10px; text-overflow: initial; }
   .nav-label-full { display: none; }
   .nav-label-compact { display: block; overflow: hidden; text-overflow: clip; }
   .theme-toggle { width: 50px; height: 30px; }
@@ -406,7 +406,7 @@ a { color: inherit; text-decoration: none; }
   .project-asset img { max-height: 58svh; }
   .project-asset object { min-height: 52svh; }
   .project-modal-mobile-navigation { min-height: 58px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); background: var(--card-glass); }
-  .project-modal-mobile-navigation button { min-height: 40px; padding: 8px 10px; display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; color: var(--text-primary); font-size: var(--text-xs-readable); font-weight: 720; }
+  .project-modal-mobile-navigation button { position: relative; min-height: 40px; padding: 8px 10px; display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; color: var(--text-primary); font-size: var(--text-xs-readable); font-weight: 720; }
   .education-item { padding: 17px 15px; }
   .education-item-header { display: grid; gap: 10px; }
   .education-item time { padding-top: 0; }

@@ -93,10 +93,9 @@ export function CharacterStage() {
       <div className="character-halo" />
       <Canvas
         camera={{ position: [0, 0, 6.6], fov: stage.fov }}
-        dpr={mobile ? [1.5, 2] : [1.15, 1.8]}
+        dpr={mobile ? [1.25, 1.6] : [1.1, 1.5]}
         gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-        frameloop={visible ? "always" : "never"}
-        shadows
+        frameloop={visible ? "demand" : "never"}
       >
         <Suspense fallback={null}>
           <CharacterScene

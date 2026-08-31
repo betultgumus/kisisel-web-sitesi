@@ -64,6 +64,8 @@ export function ExpandableProjects({ projects }: Props) {
   const lastActiveIndexRef = useRef<number | null>(null);
   const activeProject = activeIndex === null ? null : projects[activeIndex];
   const isOpen = activeIndex !== null;
+  const dialogTitleId = activeIndex === null ? undefined : `project-dialog-title-${activeIndex}`;
+  const dialogDescriptionId = activeIndex === null ? undefined : `project-dialog-description-${activeIndex}`;
   if (activeIndex !== null) lastActiveIndexRef.current = activeIndex;
 
   const close = useCallback(() => {
@@ -187,7 +189,8 @@ export function ExpandableProjects({ projects }: Props) {
               className={`project-modal ${activeProject.assetType !== "none" && activeProject.assetSrc ? "has-asset" : "no-asset"}`}
               role="dialog"
               aria-modal="true"
-              aria-labelledby="project-dialog-title"
+              aria-labelledby={dialogTitleId}
+              aria-describedby={dialogDescriptionId}
               key={activeProject.title}
               initial={{ opacity: 0, y: 22, scale: .985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -210,8 +213,8 @@ export function ExpandableProjects({ projects }: Props) {
                     <span>{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
                     {activeProject.date ? <time>{activeProject.date}</time> : null}
                   </div>
-                  <h3 id="project-dialog-title">{activeProject.title}</h3>
-                  <p>{activeProject.detailDescription}</p>
+                  <h3 id={dialogTitleId}>{activeProject.title}</h3>
+                  <p id={dialogDescriptionId}>{activeProject.detailDescription}</p>
                   {activeProject.bullets?.length ? (
                     <ul className="project-details">{activeProject.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
                   ) : null}

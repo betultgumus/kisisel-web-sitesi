@@ -157,7 +157,7 @@ function ContactContent() {
     <div className="contact-editorial">
       <div className="contact-callout">
         <span>{profile.fullName}</span>
-        <h3>Data - AI - Web</h3>
+        <h3>Data &amp; AI</h3>
         <p>İş teklifleri ve birlikte proje geliştirmek için iletişime geçebilirsiniz.</p>
         <a className="contact-primary" href={contactLinks.email}><IconMail size={18} aria-hidden="true" /> E-posta gönder</a>
       </div>

@@ -3,7 +3,7 @@ import { useThree, type ThreeElements } from "@react-three/fiber";
 import { useEffect, useMemo } from "react";
 import { Box3, LinearFilter, LinearMipmapLinearFilter, Mesh, Vector3, type Material, type Texture } from "three";
 
-const MODEL_URL = "/models/businesswoman.glb";
+const MODEL_URL = "/models/businesswoman-web-v1.glb";
 const NECK_START_RATIO = 0.622;
 const HEAD_START_RATIO = 0.7;
 const HEAD_PIVOT_RATIO = 0.65;

@@ -21,7 +21,7 @@ function DockItem({ label, href, onClick, mouseX, children }: DockItemProps) {
   const iconSize = useSpring(useTransform(distance, [-150, 0, 150], [21, 36, 21]), { mass: 0.1, stiffness: 150, damping: 12 });
   const common = { ref: ref as never, className: "dock-item", style: { width, height: width }, "aria-label": label };
   const content = <><motion.span style={{ width: iconSize, height: iconSize }}>{children}</motion.span><span className="dock-tooltip">{label}</span></>;
-  return href ? <motion.a {...common} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{content}</motion.a> : <motion.button {...common} onClick={onClick}>{content}</motion.button>;
+  return href ? <motion.a {...common} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{content}</motion.a> : <motion.button {...common} type="button" onClick={onClick}>{content}</motion.button>;
 }
 
 export const FloatingDock = forwardRef<HTMLDivElement, { onOpenContact: () => void }>(function FloatingDock({ onOpenContact }, ref) {
