@@ -7,10 +7,10 @@ type Props = { sections: Section[]; activeIndex: number; onSelect: (index: numbe
 export function SectionWheel({ sections, activeIndex, onSelect }: Props) {
   const compact = useMediaQuery("(max-width: 1100px)");
   const geometry = compact
-      ? { centerX: -410, centerY: 245, radiusX: 444, radiusY: 308, angleStep: 18 }
-      : { centerX: -375, centerY: 270, radiusX: 500, radiusY: 343, angleStep: 17 };
-  const markerRadius = 8;
-  const itemHalfHeight = 23;
+      ? { centerX: -441, centerY: 245, radiusX: 475, radiusY: 329, angleStep: 18 }
+      : { centerX: -410, centerY: 270, radiusX: 535, radiusY: 367, angleStep: 17 };
+  const markerRadius = 9;
+  const itemHalfHeight = 24;
   return (
     <div className="section-wheel" aria-label="Bölüm çarkı">
       <div
