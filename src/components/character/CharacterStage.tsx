@@ -44,8 +44,6 @@ function useViewportHeight() {
 
 export function CharacterStage() {
   const mobile = useMediaQuery("(max-width: 620px)");
-  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
-  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const viewportHeight = useViewportHeight();
   const stageRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
@@ -102,7 +100,6 @@ export function CharacterStage() {
             theme={theme}
             mobile={mobile}
             targetHeight={stage.targetHeight}
-            trackingEnabled={visible && !mobile && finePointer && !reducedMotion}
           />
         </Suspense>
       </Canvas>

@@ -6,7 +6,6 @@ type Props = {
   theme: "light" | "dark";
   mobile: boolean;
   targetHeight: number;
-  trackingEnabled: boolean;
 };
 
 export function CharacterScene({ theme, mobile, targetHeight }: Props) {
