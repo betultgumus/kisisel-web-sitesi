@@ -119,7 +119,12 @@ export function ExpandableProjects({ projects }: Props) {
               <span>{String(index + 1).padStart(2, "0")}</span>
               {project.date ? <time>{project.date}</time> : null}
             </header>
-            <h3>{project.title}</h3>
+            {project.logoSrc ? (
+              <div className="compact-project-title-row">
+                <img className="project-logo" src={project.logoSrc} alt={project.logoAlt ?? ""} loading="lazy" decoding="async" />
+                <h3>{project.title}</h3>
+              </div>
+            ) : <h3>{project.title}</h3>}
             <p>{project.shortDescription}</p>
             <div className="project-keywords" aria-label={`${project.title} teknolojileri`}>
               {project.tags.slice(0, 6).map((tag) => <span key={tag}>{tag}</span>)}
@@ -170,19 +175,24 @@ export function ExpandableProjects({ projects }: Props) {
               <button ref={closeButtonRef} type="button" className="project-modal-close" onClick={close} aria-label="Proje detayını kapat">
                 <IconX size={20} aria-hidden="true" />
               </button>
-              <motion.div
-                className="project-modal-scroll"
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={.06}
-                onDragEnd={onDragEnd}
-              >
-                <div className="project-modal-copy">
+              <div className="project-modal-scroll">
+                <motion.div
+                  className="project-modal-copy"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={.06}
+                  onDragEnd={onDragEnd}
+                >
                   <div className="project-modal-meta">
                     <span>{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
                     {activeProject.date ? <time>{activeProject.date}</time> : null}
                   </div>
-                  <h3 id={dialogTitleId}>{activeProject.title}</h3>
+                  {activeProject.logoSrc ? (
+                    <div className="project-modal-title-row">
+                      <img className="project-logo project-logo-modal" src={activeProject.logoSrc} alt={activeProject.logoAlt ?? ""} decoding="async" />
+                      <h3 id={dialogTitleId}>{activeProject.title}</h3>
+                    </div>
+                  ) : <h3 id={dialogTitleId}>{activeProject.title}</h3>}
                   <p id={dialogDescriptionId}>{activeProject.detailDescription}</p>
                   {activeProject.bullets?.length ? (
                     <ul className="project-details">{activeProject.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
@@ -195,9 +205,9 @@ export function ExpandableProjects({ projects }: Props) {
                   <a className="project-github-link" href={activeProject.githubUrl} target="_blank" rel="noreferrer">
                     <IconBrandGithub size={17} aria-hidden="true" /> GitHub’da incele <IconExternalLink size={15} aria-hidden="true" />
                   </a>
-                </div>
+                </motion.div>
                 <ProjectPosterViewer project={activeProject} />
-              </motion.div>
+              </div>
               <div className="project-modal-mobile-navigation" aria-label="Projeler arasında gezin">
                 <button type="button" onClick={previous}><IconArrowLeft size={18} aria-hidden="true" /> Önceki</button>
                 <button type="button" onClick={next}>Sonraki <IconArrowRight size={18} aria-hidden="true" /></button>

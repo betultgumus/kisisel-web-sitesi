@@ -45,6 +45,7 @@ export function ProjectPosterViewer({ project }: { project: ProjectEntry }) {
   };
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
     event.stopPropagation();
     const viewport = viewportRef.current;
     if (!viewport) return;
@@ -68,6 +69,7 @@ export function ProjectPosterViewer({ project }: { project: ProjectEntry }) {
 
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!pointersRef.current.has(event.pointerId)) return;
+    event.preventDefault();
     event.stopPropagation();
     pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const viewport = viewportRef.current;
@@ -86,6 +88,8 @@ export function ProjectPosterViewer({ project }: { project: ProjectEntry }) {
   };
 
   const releasePointer = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     pointersRef.current.delete(event.pointerId);
     if (pointersRef.current.size === 1) {
       const [point] = Array.from(pointersRef.current.values());
@@ -127,12 +131,14 @@ export function ProjectPosterViewer({ project }: { project: ProjectEntry }) {
       {previewSrc ? (
         <div
           ref={viewportRef}
+          data-poster-viewer="true"
           className={`project-poster-viewport ${zoom > MIN_ZOOM ? "is-zoomed" : ""}`}
           onWheel={onWheel}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={releasePointer}
           onPointerCancel={releasePointer}
+          onLostPointerCapture={releasePointer}
           aria-label={`${project.title} poster önizlemesi. Tekerlek, düğmeler veya iki parmak hareketiyle yakınlaştırılabilir.`}
         >
           <img

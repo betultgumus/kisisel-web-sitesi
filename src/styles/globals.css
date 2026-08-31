@@ -154,15 +154,15 @@ a { color: inherit; text-decoration: none; }
 
 .portfolio-layout { position: relative; width: min(1500px, 100%); margin-inline: auto; padding: 52px clamp(24px, 5vw, 76px) 0 0; display: grid; grid-template-columns: clamp(220px, 22vw, 330px) minmax(0, 940px); gap: clamp(28px, 5vw, 82px); align-items: start; }
 .sticky-wheel-shell { --wheel-shell-width: 330px; position: sticky; z-index: 12; top: 88px; width: var(--wheel-shell-width); height: calc(100svh - 112px); min-height: 560px; margin-left: min(0px, calc((1500px - 100vw) / 2)); align-self: start; clip-path: inset(-100vmax 0 -100vmax 0); }
-.section-wheel { width: 100%; height: 590px; position: relative; z-index: 8; overflow: visible; }
+.section-wheel { width: 100%; height: 640px; position: relative; z-index: 8; overflow: visible; }
 .wheel-arc { position: absolute; border: 1.5px solid color-mix(in srgb, var(--text-primary) 18%, transparent); border-radius: 50%; box-shadow: inset -1px 0 color-mix(in srgb, var(--border-light) 75%, transparent), 10px 0 38px rgba(92, 51, 76, .06); }
 .wheel-arc::after { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--text-primary) 7%, transparent); }
-.wheel-item { position: absolute; top: 0; left: 0; width: max-content; max-width: 205px; height: 48px; display: flex; align-items: center; gap: 15px; border: 0; background: transparent; transform-origin: 9px center; white-space: nowrap; }
-.wheel-dot { flex: 0 0 18px; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--text-soft); background: var(--background-deep); transform: scale(.67); transition: border-color .25s, background-color .25s, box-shadow .25s, transform .25s; }
+.wheel-item { position: absolute; top: 0; left: 0; width: max-content; max-width: 220px; height: 50px; display: flex; align-items: center; gap: 16px; border: 0; background: transparent; transform-origin: 10px center; white-space: nowrap; }
+.wheel-dot { flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--text-soft); background: var(--background-deep); transform: scale(.67); transition: border-color .25s, background-color .25s, box-shadow .25s, transform .25s; }
 .wheel-item.active .wheel-dot { border: 4px solid var(--accent); background: var(--text-primary); transform: scale(1); box-shadow: 0 0 0 8px rgba(236,72,153,.16), 0 0 28px rgba(236,72,153,.18); }
-.wheel-label { display: block; overflow: hidden; max-width: 160px; font-size: 15px; font-weight: 560; letter-spacing: .02em; text-overflow: ellipsis; }
+.wheel-label { display: block; overflow: hidden; max-width: 174px; font-size: 17px; font-weight: 560; letter-spacing: .02em; text-overflow: ellipsis; }
 .wheel-item[data-distance="1"] .wheel-label { font-weight: 680; color: var(--text-primary); }
-.wheel-item.active .wheel-label { max-width: clamp(140px, 10vw, 166px); font-family: Georgia, serif; font-size: clamp(25px, 1.9vw, 29px); font-weight: 650; letter-spacing: -.035em; }
+.wheel-item.active .wheel-label { max-width: clamp(148px, 10vw, 176px); font-family: Georgia, serif; font-size: clamp(27px, 2vw, 31px); font-weight: 650; letter-spacing: -.035em; }
 
 .content-sections { position: relative; z-index: 8; min-width: 0; }
 .content-section { min-height: 82svh; display: flex; align-items: center; padding: clamp(42px, 8vh, 96px) 0; scroll-margin-top: 92px; }
@@ -222,6 +222,9 @@ a { color: inherit; text-decoration: none; }
 .compact-project-header > span { color: var(--accent); }
 .compact-project-header small, .compact-project-header time { font-size: inherit; font-weight: inherit; }
 .compact-project-card h3 { margin: 15px 0 0; color: var(--text-primary); font: 560 clamp(21px, 2vw, 28px)/1.12 Georgia, serif; letter-spacing: -.035em; }
+.compact-project-title-row { margin-top: 15px; display: flex; align-items: flex-start; gap: 12px; }
+.compact-project-title-row h3 { min-width: 0; margin: 0; }
+.project-logo { width: 46px; height: 46px; flex: none; object-fit: cover; border: 1px solid var(--border); border-radius: 13px; box-shadow: 0 9px 20px -14px rgba(8,21,36,.58); }
 .compact-project-card > p { margin: 11px 0 0; color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.62; }
 .project-keywords { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 6px; }
 .project-keywords span { padding: 5px 8px; border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border)); border-radius: 999px; color: var(--text-secondary); font-size: 13px; line-height: 1.25; }
@@ -247,6 +250,9 @@ a { color: inherit; text-decoration: none; }
 .project-modal-meta { display: flex; justify-content: space-between; gap: 20px; color: var(--text-soft); font-size: var(--text-xs-readable); font-weight: 720; letter-spacing: .1em; text-transform: uppercase; }
 .project-modal-meta > span { color: var(--accent); }
 .project-modal-copy h3 { margin: 17px 0; font: 550 clamp(28px, 3.5vw, 42px)/1.04 Georgia, serif; letter-spacing: -.045em; }
+.project-modal-title-row { margin: 17px 0; display: flex; align-items: center; gap: 14px; }
+.project-modal-title-row h3 { min-width: 0; margin: 0; }
+.project-logo-modal { width: 56px; height: 56px; border-radius: 15px; }
 .project-modal-copy > p { margin: 0; color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.68; }
 .project-extra-text { margin-top: 18px !important; padding: 13px 15px; border-left: 2px solid color-mix(in srgb, var(--accent) 62%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
 .project-modal-tags { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -324,9 +330,9 @@ a { color: inherit; text-decoration: none; }
   .hero-character { width: 54vw; right: -3vw; }
   .technology-transition { min-height: 112px; }
   .portfolio-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 28px; padding-right: 24px; }
-  .sticky-wheel-shell { --wheel-shell-width: 190px; margin-left: 0; }
-  .wheel-label { max-width: 130px; font-size: 15px; }
-  .wheel-item.active .wheel-label { max-width: 130px; font-size: 25px; }
+  .sticky-wheel-shell { --wheel-shell-width: 216px; margin-left: 0; }
+  .wheel-label { max-width: 150px; font-size: 16px; }
+  .wheel-item.active .wheel-label { max-width: 150px; font-size: 27px; }
   .capsule-nav { width: calc(100% - 36px); }
   .nav-items button { padding-inline: 9px; font-size: 11px; }
 }
@@ -338,9 +344,9 @@ a { color: inherit; text-decoration: none; }
   .hero-character { width: 62vw; height: 72vh; right: -7vw; top: 22vh; }
   .technology-transition { min-height: 106px; }
   .portfolio-layout { grid-template-columns: 116px minmax(0, 1fr); gap: 18px; padding: 30px 14px 0 0; }
-  .sticky-wheel-shell { top: 74px; height: calc(100svh - 92px); min-height: 520px; }
-  .wheel-label { max-width: 100px; font-size: 13px; }
-  .wheel-item.active .wheel-label { max-width: 100px; font-size: 21px; }
+  .sticky-wheel-shell { --wheel-shell-width: 190px; top: 74px; height: calc(100svh - 92px); min-height: 520px; }
+  .wheel-label { max-width: 100px; font-size: 14px; }
+  .wheel-item.active .wheel-label { max-width: 100px; font-size: 22px; }
   .content-section { min-height: 76svh; scroll-margin-top: 76px; }
   .section-glass { padding: 28px; border-radius: 28px; }
   .section-glass h2 { font-size: clamp(38px, 7vw, 56px); }
@@ -417,6 +423,9 @@ a { color: inherit; text-decoration: none; }
   .timeline-card time { padding-top: 0; }
   .compact-project-card { min-height: 0; padding: 17px 15px; border-radius: 18px; contain-intrinsic-size: auto 230px; }
   .compact-project-card h3 { font-size: clamp(21px, 6.5vw, 27px); }
+  .compact-project-title-row { gap: 10px; }
+  .project-logo { width: 40px; height: 40px; border-radius: 11px; }
+  .project-logo-modal { width: 46px; height: 46px; border-radius: 13px; }
   .compact-project-actions { padding-top: 16px; }
   .compact-project-actions a, .compact-project-actions button { flex: 1 1 145px; }
   .project-modal-backdrop { padding: 8px; display: flex; align-items: center; justify-content: center; }

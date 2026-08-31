@@ -33,6 +33,8 @@ export type ProjectEntry = {
   detailDescription: string;
   tags: string[];
   githubUrl: string;
+  logoSrc?: string;
+  logoAlt?: string;
   assetType: ProjectAssetType;
   assetSrc?: string;
   assetPreviewSrc?: string;
