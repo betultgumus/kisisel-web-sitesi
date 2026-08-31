@@ -1,12 +1,11 @@
 import {
   SiClaude,
-  SiGooglegemini,
   SiGithub,
   SiPython,
 } from "react-icons/si";
 import { PiMicrosoftExcelLogo } from "react-icons/pi";
 import { VscOpenai, VscVscode } from "react-icons/vsc";
-import { PowerBiIcon } from "@/components/technology/ToolBrandIcons";
+import { GeminiBrandIcon, PowerBiIcon } from "@/components/technology/ToolBrandIcons";
 import type { DetailEntry, ProjectEntry, Section, Technology } from "@/types/content";
 
 export const profile = {
@@ -182,8 +181,8 @@ export const contactLinks = {
 
 export const technologies: Technology[] = [
   { name: "VS Code", icon: VscVscode, color: "#007ACC" },
-  { name: "ChatGPT", icon: VscOpenai, color: "#10A37F" },
-  { name: "Gemini", icon: SiGooglegemini, color: "#8E75B2" },
+  { name: "ChatGPT", icon: VscOpenai, color: "#202123", darkColor: "#F4F4F5" },
+  { name: "Gemini", icon: GeminiBrandIcon, color: "#6D79D6" },
   { name: "Claude", icon: SiClaude, color: "#D97757" },
   { name: "Power BI", icon: PowerBiIcon, color: "#F2C811" },
   { name: "Python", icon: SiPython, color: "#3776AB" },

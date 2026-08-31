@@ -48,4 +48,5 @@ export type Technology = {
   name: string;
   icon: IconType;
   color: string;
+  darkColor?: string;
 };

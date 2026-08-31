@@ -17,7 +17,6 @@ export function Hero() {
         <span>Keşfetmek için kaydır</span>
         <IconArrowDown size={18} stroke={1.6} />
       </a>
-      <span className="hero-index" aria-hidden="true">01 — 07</span>
     </section>
   );
 }

@@ -4,11 +4,11 @@ import type { CSSProperties } from "react";
 function TechnologyGroup({ duplicate = false }: { duplicate?: boolean }) {
   return (
     <div className="marquee-group" role={duplicate ? undefined : "list"} aria-hidden={duplicate || undefined}>
-      {technologies.map(({ name, icon: Icon, color }) => (
+      {technologies.map(({ name, icon: Icon, color, darkColor }) => (
         <div
           className="tech-item"
           key={name}
-          style={{ "--brand-color": color } as CSSProperties}
+          style={{ "--brand-color": color, "--brand-color-dark": darkColor ?? color } as CSSProperties}
           role={duplicate ? undefined : "listitem"}
           aria-label={duplicate ? undefined : name}
         >
