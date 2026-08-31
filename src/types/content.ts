@@ -35,6 +35,7 @@ export type ProjectEntry = {
   githubUrl: string;
   assetType: ProjectAssetType;
   assetSrc?: string;
+  assetPreviewSrc?: string;
   assetAlt?: string;
   notes?: string;
   extraText?: string;

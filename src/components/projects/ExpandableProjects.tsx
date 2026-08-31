@@ -5,10 +5,9 @@ import {
   IconArrowRight,
   IconBrandGithub,
   IconExternalLink,
-  IconFileTypePdf,
-  IconPhoto,
   IconX,
 } from "@tabler/icons-react";
+import { ProjectPosterViewer } from "@/components/projects/ProjectPosterViewer";
 import type { ProjectEntry } from "@/types/content";
 
 type Props = { projects: ProjectEntry[] };
@@ -24,35 +23,6 @@ function ProjectHighlights({ highlights }: Pick<ProjectEntry, "highlights">) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function ProjectAsset({ project }: { project: ProjectEntry }) {
-  if (project.assetType === "none" || !project.assetSrc) return null;
-
-  if (project.assetType === "image") {
-    return (
-      <figure className="project-asset project-asset-image">
-        <div className="project-asset-label"><IconPhoto size={16} aria-hidden="true" /> Proje görseli</div>
-        <img src={project.assetSrc} alt={project.assetAlt ?? `${project.title} proje görseli`} loading="lazy" />
-      </figure>
-    );
-  }
-
-  return (
-    <figure className="project-asset project-asset-pdf">
-      <div className="project-asset-label"><IconFileTypePdf size={16} aria-hidden="true" /> PDF önizleme</div>
-      <object
-        data={`${project.assetSrc}#view=FitH&toolbar=0&navpanes=0`}
-        type="application/pdf"
-        aria-label={project.assetAlt ?? `${project.title} PDF önizlemesi`}
-      >
-        <p>Tarayıcınız gömülü PDF önizlemesini desteklemiyor.</p>
-      </object>
-      <a href={project.assetSrc} target="_blank" rel="noreferrer">
-        Tam belgeyi aç <IconExternalLink size={15} aria-hidden="true" />
-      </a>
-    </figure>
   );
 }
 
@@ -207,7 +177,6 @@ export function ExpandableProjects({ projects }: Props) {
                 dragElastic={.06}
                 onDragEnd={onDragEnd}
               >
-                <ProjectAsset project={activeProject} />
                 <div className="project-modal-copy">
                   <div className="project-modal-meta">
                     <span>{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
@@ -227,6 +196,7 @@ export function ExpandableProjects({ projects }: Props) {
                     <IconBrandGithub size={17} aria-hidden="true" /> GitHub’da incele <IconExternalLink size={15} aria-hidden="true" />
                   </a>
                 </div>
+                <ProjectPosterViewer project={activeProject} />
               </motion.div>
               <div className="project-modal-mobile-navigation" aria-label="Projeler arasında gezin">
                 <button type="button" onClick={previous}><IconArrowLeft size={18} aria-hidden="true" /> Önceki</button>

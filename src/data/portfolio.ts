@@ -127,7 +127,10 @@ export const portfolioEntries: ProjectEntry[] = [
     ],
     tags: ["Selenium", "BeautifulSoup", "XGBoost", "K-Means", "Random Forest"],
     githubUrl: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/game-regulation-analytics",
-    assetType: "none",
+    assetType: "pdf",
+    assetSrc: "/projects/anivia-poster.pdf",
+    assetPreviewSrc: "/projects/previews/anivia-poster.webp",
+    assetAlt: "ANIVIA yasal regülasyon ve oyun ekosistemi karar destek sistemi araştırma posteri",
   },
   {
     title: "Beko Segmentasyon Analizi",
@@ -143,7 +146,10 @@ export const portfolioEntries: ProjectEntry[] = [
     ],
     tags: ["Selenium", "K-Means", "Streamlit", "Özellik Mühendisliği"],
     githubUrl: "https://github.com/betultgumus/ybst-veri-bilimi",
-    assetType: "none",
+    assetType: "pdf",
+    assetSrc: "/projects/beko-segmentation-poster.pdf",
+    assetPreviewSrc: "/projects/previews/beko-segmentation-poster.webp",
+    assetAlt: "Beko müşteri deneyimi ve ürün analitik sistemi posteri",
   },
   {
     title: "Türkiye Dijital Oyun Pazarında Fiyat Analizi",

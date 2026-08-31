@@ -241,9 +241,9 @@ a { color: inherit; text-decoration: none; }
 .project-side-navigation.next { grid-column: 3; }
 .project-side-navigation:hover, .project-side-navigation:focus-visible { transform: scale(1.08); border-color: rgba(236,72,153,.68); background: rgba(25,45,70,.94); }
 .project-modal-scroll { min-height: 0; overflow-y: auto; display: block; touch-action: pan-y; }
-.project-modal.has-asset .project-modal-scroll { display: grid; grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); }
+.project-modal.has-asset .project-modal-scroll { display: grid; grid-template-columns: minmax(0, .88fr) minmax(420px, 1.12fr); overflow: hidden; }
 .project-modal-copy { width: 100%; max-width: 840px; margin-inline: auto; padding: clamp(32px, 4vw, 54px); }
-.project-modal.has-asset .project-modal-copy { max-width: none; margin: 0; }
+.project-modal.has-asset .project-modal-copy { min-height: 0; max-width: none; margin: 0; overflow-y: auto; }
 .project-modal-meta { display: flex; justify-content: space-between; gap: 20px; color: var(--text-soft); font-size: var(--text-xs-readable); font-weight: 720; letter-spacing: .1em; text-transform: uppercase; }
 .project-modal-meta > span { color: var(--accent); }
 .project-modal-copy h3 { margin: 17px 0; font: 550 clamp(28px, 3.5vw, 42px)/1.04 Georgia, serif; letter-spacing: -.045em; }
@@ -252,11 +252,24 @@ a { color: inherit; text-decoration: none; }
 .project-modal-tags { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px; }
 .project-modal-tags span { padding: 6px 9px; border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--border)); border-radius: 999px; color: var(--text-secondary); font-size: var(--text-xs-readable); }
 .project-github-link { width: max-content; max-width: 100%; min-height: 40px; margin-top: 22px; padding: 9px 13px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-primary); font-size: var(--text-xs-readable); font-weight: 740; }
-.project-asset { min-width: 0; min-height: 100%; margin: 0; padding: 18px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--card-glass) 78%, transparent); }
-.project-asset-label { display: flex; align-items: center; gap: 7px; color: var(--text-soft); font-size: var(--text-xs-readable); font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
-.project-asset img { width: 100%; min-height: 0; max-height: 680px; flex: 1; object-fit: contain; border-radius: 15px; background: color-mix(in srgb, var(--background-deep) 86%, transparent); }
+.project-asset { min-width: 0; min-height: 0; height: 100%; margin: 0; padding: 14px; display: flex; flex-direction: column; gap: 10px; border-left: 1px solid var(--border); background: color-mix(in srgb, var(--card-glass) 78%, transparent); }
+.project-asset-toolbar { min-height: 42px; padding-right: 48px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.project-asset-label { flex: none; display: flex; align-items: center; gap: 7px; color: var(--text-soft); font-size: var(--text-xs-readable); font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
+.project-poster-controls { display: flex; align-items: center; gap: 5px; }
+.project-poster-controls button { min-width: 36px; height: 36px; padding: 0 9px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); border-radius: 11px; background: color-mix(in srgb, var(--surface-strong) 78%, transparent); color: var(--text-primary); transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
+.project-poster-controls button:hover:not(:disabled), .project-poster-controls button:focus-visible { border-color: color-mix(in srgb, var(--accent) 54%, var(--border)); background: color-mix(in srgb, var(--accent) 7%, var(--surface-strong)); transform: translateY(-1px); }
+.project-poster-controls button:disabled { opacity: .38; cursor: not-allowed; }
+.project-poster-controls output { min-width: 48px; color: var(--text-secondary); font-size: 12px; font-weight: 720; text-align: center; font-variant-numeric: tabular-nums; }
+.project-poster-controls .project-poster-fit { padding-inline: 10px; }
+.project-poster-controls .project-poster-fit span { font-size: 12px; font-weight: 720; }
+.project-poster-viewport { min-height: 0; flex: 1; overflow: auto; overscroll-behavior: contain; touch-action: none; border: 1px solid color-mix(in srgb, var(--border) 78%, transparent); border-radius: 15px; background: #fff; box-shadow: 0 16px 36px -30px rgba(8,21,36,.58); cursor: grab; scrollbar-color: color-mix(in srgb, var(--accent) 36%, var(--border)) transparent; }
+.project-poster-viewport:active { cursor: grabbing; }
+.project-poster-viewport img { min-width: 100%; max-width: none; height: auto; display: block; background: white; user-select: none; -webkit-user-drag: none; transition: width .12s ease-out; }
+.project-poster-viewport.is-zoomed img { transition: none; }
 .project-asset object { width: 100%; min-height: 520px; flex: 1; border: 0; border-radius: 15px; background: white; }
-.project-asset > a { width: max-content; display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: var(--text-xs-readable); font-weight: 720; }
+.project-asset-footer { min-height: 25px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.project-asset-footer > span { color: var(--text-soft); font-size: 11px; line-height: 1.35; }
+.project-asset-footer > a { flex: none; display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: var(--text-xs-readable); font-weight: 720; }
 .project-modal-mobile-navigation { display: none; }
 
 .education-content { margin-top: clamp(34px, 5vw, 58px); }
@@ -299,6 +312,13 @@ a { color: inherit; text-decoration: none; }
 .dock-item svg { width: 100%; height: 100%; stroke-width: 1.45; }
 .dock-tooltip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(5px); opacity: 0; pointer-events: none; padding: 5px 8px; border-radius: 7px; background: #1d1e22; color: white; font-size: 9px; white-space: nowrap; transition: .18s; }
 .dock-item:hover .dock-tooltip, .dock-item:focus-visible .dock-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (max-width: 900px) {
+  .project-modal.has-asset .project-modal-scroll { display: block; overflow-y: auto; }
+  .project-modal.has-asset .project-modal-copy { overflow: visible; }
+  .project-asset { min-height: min(68svh, 620px); height: auto; border-top: 1px solid var(--border); border-left: 0; }
+  .project-asset-toolbar { padding-right: 0; }
+  .project-poster-viewport { min-height: 420px; height: 58svh; flex: none; }
+}
 @media (max-width: 1100px) {
   .hero-copy { width: 52vw; }
   .hero-character { width: 54vw; right: -3vw; }
@@ -402,11 +422,16 @@ a { color: inherit; text-decoration: none; }
   .project-modal-backdrop { padding: 8px; display: flex; align-items: center; justify-content: center; }
   .project-side-navigation { display: none; }
   .project-modal { grid-column: auto; width: 100%; max-height: 94svh; border-radius: 22px; }
-  .project-modal.has-asset .project-modal-scroll { display: block; }
+  .project-modal.has-asset .project-modal-scroll { display: block; overflow-y: auto; }
   .project-modal-copy { padding: 22px 17px 28px; }
+  .project-modal.has-asset .project-modal-copy { overflow: visible; }
   .project-modal-copy h3 { font-size: clamp(27px, 8.5vw, 38px); }
-  .project-asset { min-height: auto; padding: 14px; border-right: 0; border-bottom: 1px solid var(--border); }
-  .project-asset img { max-height: 58svh; }
+  .project-asset { min-height: 62svh; height: auto; padding: 14px; border-top: 1px solid var(--border); border-left: 0; }
+  .project-asset-toolbar { min-height: 0; padding-right: 0; flex-wrap: wrap; }
+  .project-poster-controls { width: 100%; justify-content: flex-end; }
+  .project-poster-controls button { min-width: 44px; height: 44px; }
+  .project-poster-viewport { min-height: 360px; height: 58svh; flex: none; }
+  .project-asset-footer { align-items: flex-start; flex-direction: column; gap: 7px; }
   .project-asset object { min-height: 52svh; }
   .project-modal-mobile-navigation { min-height: 58px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); background: var(--card-glass); }
   .project-modal-mobile-navigation button { position: relative; min-height: 40px; padding: 8px 10px; display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; color: var(--text-primary); font-size: var(--text-xs-readable); font-weight: 720; }
