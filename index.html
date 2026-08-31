@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f1efe9" />
+    <script>
+      (() => {
+        try {
+          const savedTheme = window.localStorage.getItem("portfolio-theme");
+          const theme = savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = theme;
+          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#081524" : "#f1efe9");
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
     <meta name="author" content="Betül Tuba Gümüş" />
     <meta name="description" content="Python ve SQL ile veri analizi, makine öğrenmesi, yapay zekâ ve karar destek sistemleri geliştiren Betül Tuba Gümüş'ün kişisel portfolyosu." />
     <meta name="robots" content="index, follow" />

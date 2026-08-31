@@ -8,6 +8,7 @@ function TechnologyGroup({ duplicate = false }: { duplicate?: boolean }) {
         <div
           className="tech-item"
           key={name}
+          data-technology={name}
           style={{ "--brand-color": color, "--brand-color-dark": darkColor ?? color } as CSSProperties}
           role={duplicate ? undefined : "listitem"}
           aria-label={duplicate ? undefined : name}

@@ -8,6 +8,12 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+const themeColors: Record<Theme, string> = { light: "#f1efe9", dark: "#081524" };
+
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColors[theme]);
+}
 
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "light";
@@ -15,7 +21,7 @@ function getInitialTheme(): Theme {
   const theme: Theme = saved === "light" || saved === "dark"
     ? saved
     : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  document.documentElement.dataset.theme = theme;
+  applyTheme(theme);
   return theme;
 }
 
@@ -25,7 +31,7 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     theme,
     toggleTheme: () => setTheme((current) => {
       const next = current === "light" ? "dark" : "light";
-      document.documentElement.dataset.theme = next;
+      applyTheme(next);
       window.localStorage.setItem("portfolio-theme", next);
       return next;
     }),

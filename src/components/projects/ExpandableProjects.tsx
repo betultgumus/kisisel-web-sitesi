@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, type PanInfo } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -59,39 +59,74 @@ function ProjectAsset({ project }: { project: ProjectEntry }) {
 export function ExpandableProjects({ projects }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
   const detailButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const lastActiveIndexRef = useRef<number | null>(null);
   const activeProject = activeIndex === null ? null : projects[activeIndex];
+  const isOpen = activeIndex !== null;
+  if (activeIndex !== null) lastActiveIndexRef.current = activeIndex;
 
-  const close = () => {
-    const previousIndex = activeIndex;
+  const close = useCallback(() => {
+    const previousIndex = lastActiveIndexRef.current;
     setActiveIndex(null);
     window.setTimeout(() => previousIndex !== null && detailButtonRefs.current[previousIndex]?.focus(), 0);
-  };
-  const previous = () => setActiveIndex((current) => current === null ? 0 : (current - 1 + projects.length) % projects.length);
-  const next = () => setActiveIndex((current) => current === null ? 0 : (current + 1) % projects.length);
+  }, []);
+  const previous = useCallback(() => setActiveIndex((current) => current === null ? 0 : (current - 1 + projects.length) % projects.length), [projects.length]);
+  const next = useCallback(() => setActiveIndex((current) => current === null ? 0 : (current + 1) % projects.length), [projects.length]);
 
   useEffect(() => {
-    if (activeIndex === null) return;
+    if (!isOpen) return;
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
+    const inertedElements = new Map<HTMLElement, boolean>();
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
     document.body.classList.add("project-modal-open");
+
+    let activeBranch: HTMLElement | null = backdropRef.current;
+    while (activeBranch?.parentElement && activeBranch.parentElement !== document.body) {
+      const parent: HTMLElement = activeBranch.parentElement;
+      Array.from(parent.children).forEach((sibling) => {
+        if (sibling === activeBranch || !(sibling instanceof HTMLElement)) return;
+        inertedElements.set(sibling, sibling.inert);
+        sibling.inert = true;
+      });
+      activeBranch = parent;
+    }
+
     closeButtonRef.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
       if (event.key === "ArrowLeft") previous();
       if (event.key === "ArrowRight") next();
+      if (event.key !== "Tab") return;
+
+      const focusableElements = Array.from(backdropRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ) ?? []).filter((element) => element.tabIndex >= 0 && element.getClientRects().length > 0);
+      if (!focusableElements.length) return;
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+      const focusIsOutside = !backdropRef.current?.contains(document.activeElement);
+      if (event.shiftKey && (document.activeElement === first || focusIsOutside)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || focusIsOutside)) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
       document.body.classList.remove("project-modal-open");
+      inertedElements.forEach((wasInert, element) => { element.inert = wasInert; });
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeIndex]);
+  }, [close, isOpen, next, previous]);
 
   const onDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (Math.abs(info.offset.x) < 60) return;
@@ -137,6 +172,7 @@ export function ExpandableProjects({ projects }: Props) {
       <AnimatePresence>
         {activeProject && activeIndex !== null ? (
           <motion.div
+            ref={backdropRef}
             className="project-modal-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
