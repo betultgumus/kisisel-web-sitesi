@@ -131,7 +131,7 @@ export const portfolioEntries: ProjectEntry[] = [
   },
   {
     title: "Beko Segmentasyon Analizi",
-    shortDescription: "Dinamik ürün verilerini fiyat/performans temelinde 6 stratejik segmente ayırdım ve sonuçları Streamlit dashboard ile görselleştirdim.",
+    shortDescription: "Dinamik ürün verilerinin fiyat/performans temelinde 6 stratejik segmente ayrılması ve sonuçların Streamlit dashboard ile görselleştirilmesi.",
     detailDescription: "Beko web sitesinden alınan dinamik ürün verileriyle fiyat/performans temelli segmentasyon analizi.",
     bullets: [
       "Selenium ile veri toplama; özellik mühendisliği ve ölçeklendirme.",
