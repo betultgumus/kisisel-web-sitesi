@@ -13,6 +13,8 @@ export type DetailEntry = {
   title: string;
   meta: string;
   description: string;
+  logoSrc?: string;
+  logoAlt?: string;
   role?: string;
   organization?: string;
   location?: string;

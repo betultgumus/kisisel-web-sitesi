@@ -95,9 +95,12 @@ function ExperienceTimeline() {
           <span className="timeline-marker" aria-hidden="true"><i /></span>
           <div className="timeline-card">
             <header className="timeline-card-header">
-              <div>
-                <h3>{entry.role}</h3>
-                <span className="timeline-company">{entry.title}</span>
+              <div className="timeline-heading">
+                {entry.logoSrc ? <img className="timeline-logo" src={entry.logoSrc} alt={entry.logoAlt ?? `${entry.title} logosu`} loading="lazy" decoding="async" /> : null}
+                <div>
+                  <h3>{entry.role}</h3>
+                  <span className="timeline-company">{entry.title}</span>
+                </div>
               </div>
               <time>{entry.period}</time>
             </header>

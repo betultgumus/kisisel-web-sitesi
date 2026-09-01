@@ -59,6 +59,8 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "TekNova Profil",
     meta: "AI Destekli Web Geliştirici · Uzaktan, Serbest · 06/2026 – Devam Ediyor",
+    logoSrc: "/experience-logos/teknova_profil.png",
+    logoAlt: "TekNova Profil logosu",
     role: "AI Destekli Web Geliştirici",
     location: "Uzaktan, Serbest",
     period: "06/2026 – Devam Ediyor",
@@ -73,6 +75,8 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "Octapull",
     meta: "Makine Öğrenmesi Stajyeri · Uzaktan · 06/2025 – 08/2026",
+    logoSrc: "/experience-logos/octapull.png",
+    logoAlt: "Octapull logosu",
     role: "Makine Öğrenmesi Stajyeri",
     location: "Uzaktan",
     period: "06/2025 – 08/2026",
@@ -87,6 +91,8 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "Yönetim Bilişim Sistemleri Topluluğu (YBST)",
     meta: "Veri Bilimi Ekip Lideri · Bandırma · 12/2025 – 06/2026",
+    logoSrc: "/experience-logos/yonetim_bilisim_sistemleri_toplulugu.png",
+    logoAlt: "Yönetim Bilişim Sistemleri Topluluğu logosu",
     role: "Veri Bilimi Ekip Lideri",
     location: "Bandırma",
     period: "12/2025 – 06/2026",
@@ -100,6 +106,8 @@ export const experienceEntries: DetailEntry[] = [
   {
     title: "Social Office",
     meta: "Bilgi Teknolojileri Stajyeri · Uzaktan · 10/2025 – 11/2025",
+    logoSrc: "/experience-logos/social_office.png",
+    logoAlt: "Social Office logosu",
     role: "Bilgi Teknolojileri Stajyeri",
     location: "Uzaktan",
     period: "10/2025 – 11/2025",
@@ -112,6 +120,8 @@ export const experienceEntries: DetailEntry[] = [
 export const portfolioEntries: ProjectEntry[] = [
   {
     title: "7578 sayılı Kanun Kapsamında Karar Destek Sistemi (ANIVIA)",
+    logoSrc: "/experience-logos/anivia.png",
+    logoAlt: "ANIVIA Game Insight logosu",
     shortDescription: "Dijital oyun platformlarının yasal uyumluluğunu değerlendiren, Web Scraping ve makine öğrenmesi tabanlı karar destek sistemi.",
     detailDescription: "1 Mayıs 2026'da yürürlüğe giren 7578 sayılı Kanun kapsamında dijital oyun platformlarının yasal uyumluluğunu değerlendirmek ve risk analizi üretmek için geliştirildi.",
     bullets: [
