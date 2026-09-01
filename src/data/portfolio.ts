@@ -144,6 +144,8 @@ export const portfolioEntries: ProjectEntry[] = [
   },
   {
     title: "Beko Segmentasyon Analizi",
+    logoSrc: "/experience-logos/beko.png",
+    logoAlt: "Beko Segmentasyon Analizi logosu",
     shortDescription: "Dinamik ürün verilerinin fiyat/performans temelinde 6 stratejik segmente ayrılması ve sonuçların Streamlit dashboard ile görselleştirilmesi.",
     detailDescription: "Beko web sitesinden alınan dinamik ürün verileriyle fiyat/performans temelli segmentasyon analizi.",
     bullets: [
