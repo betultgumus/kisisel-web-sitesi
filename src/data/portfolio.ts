@@ -177,8 +177,6 @@ export const portfolioEntries: ProjectEntry[] = [
     ],
     tags: ["Selenium", "BeautifulSoup", "Regresyon", "EDA"],
     githubUrl: "https://github.com/betultgumus/ybs-makine-ogrenmesi/tree/main/ANIVIA/regression-price-model",
-    logoSrc: "/projects/logos/anvia-game-insight.png",
-    logoAlt: "Anvia Game Insight proje logosu",
     assetType: "none",
   },
 ];
