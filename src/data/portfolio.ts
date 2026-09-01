@@ -14,7 +14,7 @@ export const profile = {
   focus: "Veri Bilimi • Makine Öğrenmesi • Yapay Zekâ",
   heroSummary: "Python ve SQL ile veri analizi ve yapay zekâ projeleri geliştiren Yönetim Bilişim Sistemleri öğrencisi.",
   about: [
-    "Yönetim Bilişim Sistemleri öğrencisiyim. Python ve SQL kullanarak gerçek veri setleri üzerinde veri analizi, tahminleme, makine öğrenmesi ve yapay zekâ projeleri geliştiriyorum.",
+    "Yönetim Bilişim Sistemleri son sınıf öğrencisiyim.",
     "Data Analytics / AI odağında karar destek sistemleri ve veri odaklı çözümler üzerinde çalışıyorum. Analiz sonuçlarını ölçülebilir ve uygulanabilir çıktılara dönüştürmeye odaklanıyorum.",
   ],
   location: "Bursa, Türkiye",
