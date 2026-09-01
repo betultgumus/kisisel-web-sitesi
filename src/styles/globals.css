@@ -157,12 +157,12 @@ a { color: inherit; text-decoration: none; }
 .section-wheel { width: 100%; height: 640px; position: relative; z-index: 8; overflow: visible; }
 .wheel-arc { position: absolute; border: 1.5px solid color-mix(in srgb, var(--text-primary) 18%, transparent); border-radius: 50%; box-shadow: inset -1px 0 color-mix(in srgb, var(--border-light) 75%, transparent), 10px 0 38px rgba(92, 51, 76, .06); }
 .wheel-arc::after { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--text-primary) 7%, transparent); }
-.wheel-item { position: absolute; top: 0; left: 0; width: max-content; max-width: 220px; height: 50px; display: flex; align-items: center; gap: 16px; border: 0; background: transparent; transform-origin: 10px center; white-space: nowrap; }
+.wheel-item { position: absolute; top: 0; left: 0; width: max-content; max-width: none; height: 50px; display: flex; align-items: center; gap: 16px; border: 0; background: transparent; transform-origin: 10px center; white-space: nowrap; }
 .wheel-dot { flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--text-soft); background: var(--background-deep); transform: scale(.67); transition: border-color .25s, background-color .25s, box-shadow .25s, transform .25s; }
 .wheel-item.active .wheel-dot { border: 4px solid var(--accent); background: var(--text-primary); transform: scale(1); box-shadow: 0 0 0 8px rgba(236,72,153,.16), 0 0 28px rgba(236,72,153,.18); }
-.wheel-label { display: block; overflow: hidden; max-width: 174px; font-size: 17px; font-weight: 560; letter-spacing: .02em; text-overflow: ellipsis; }
+.wheel-label { display: block; overflow: visible; max-width: none; font-size: 17px; font-weight: 560; letter-spacing: .02em; text-overflow: clip; }
 .wheel-item[data-distance="1"] .wheel-label { font-weight: 680; color: var(--text-primary); }
-.wheel-item.active .wheel-label { max-width: clamp(148px, 10vw, 176px); font-family: Georgia, serif; font-size: clamp(27px, 2vw, 31px); font-weight: 650; letter-spacing: -.035em; }
+.wheel-item.active .wheel-label { max-width: none; font-family: Georgia, serif; font-size: clamp(27px, 2vw, 31px); font-weight: 650; letter-spacing: -.035em; }
 
 .content-sections { position: relative; z-index: 8; min-width: 0; }
 .content-section { min-height: 82svh; display: flex; align-items: center; padding: clamp(42px, 8vh, 96px) 0; scroll-margin-top: 92px; }
@@ -331,8 +331,8 @@ a { color: inherit; text-decoration: none; }
   .technology-transition { min-height: 112px; }
   .portfolio-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 28px; padding-right: 24px; }
   .sticky-wheel-shell { --wheel-shell-width: 216px; margin-left: 0; }
-  .wheel-label { max-width: 150px; font-size: 16px; }
-  .wheel-item.active .wheel-label { max-width: 150px; font-size: 27px; }
+  .wheel-label { max-width: none; font-size: 16px; }
+  .wheel-item.active .wheel-label { max-width: none; font-size: 27px; }
   .capsule-nav { width: calc(100% - 36px); }
   .nav-items button { padding-inline: 9px; font-size: 11px; }
 }
@@ -343,10 +343,10 @@ a { color: inherit; text-decoration: none; }
   .hero h1 { font-size: clamp(54px, 11vw, 82px); }
   .hero-character { width: 62vw; height: 72vh; right: -7vw; top: 22vh; }
   .technology-transition { min-height: 106px; }
-  .portfolio-layout { grid-template-columns: 116px minmax(0, 1fr); gap: 18px; padding: 30px 14px 0 0; }
+  .portfolio-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 18px; padding: 30px 14px 0 0; }
   .sticky-wheel-shell { --wheel-shell-width: 190px; top: 74px; height: calc(100svh - 92px); min-height: 520px; }
-  .wheel-label { max-width: 100px; font-size: 14px; }
-  .wheel-item.active .wheel-label { max-width: 100px; font-size: 22px; }
+  .wheel-label { max-width: none; font-size: 14px; }
+  .wheel-item.active .wheel-label { max-width: none; font-size: 22px; }
   .content-section { min-height: 76svh; scroll-margin-top: 76px; }
   .section-glass { padding: 28px; border-radius: 28px; }
   .section-glass h2 { font-size: clamp(38px, 7vw, 56px); }
